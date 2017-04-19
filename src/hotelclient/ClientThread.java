@@ -35,8 +35,8 @@ public class ClientThread implements Runnable{
 	public void listen(){
 		try {
 			String msg=buffr.readLine();
-			
-			main.area.append(msg+"\n");		
+			System.out.println("메시지 도착");
+			main.chatPanel.area.append(msg+"\n");		
 			
 		
 		} catch (IOException e) {
