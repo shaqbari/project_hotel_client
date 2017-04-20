@@ -38,7 +38,8 @@ import hotelclient.resv.ResvPanel;
 import hotelclient.service.ServicePanel;
 
 public class ClientMain extends JFrame implements ActionListener {
-	String room_Number = "203";
+	int room_Number = 203;
+	int hotel_user_id = 4;
 
 	// 네트워크에 사용될 객체들
 	public Socket socket;
@@ -212,7 +213,7 @@ public class ClientMain extends JFrame implements ActionListener {
 			}
 		});
 
-		setSize(1280, 960);
+		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 

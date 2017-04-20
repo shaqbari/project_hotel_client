@@ -1,11 +1,13 @@
 package hotelclient.chat;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -18,6 +20,8 @@ public class ChatPanel extends JPanel {
 	ClientMain main;			
 	Connection con;	
 	
+	JPanel p_chat;
+	JLabel la_desc;
 	public JTextArea area;
 	JScrollPane scroll;
 	JTextField txt_input;
@@ -27,12 +31,18 @@ public class ChatPanel extends JPanel {
 		
 		this.con=main.con;		
 		
+		p_chat=new JPanel();
+		la_desc=new JLabel("관리자와 채팅");
 		area=new JTextArea(15, 20);
 		scroll=new JScrollPane(area);
 		txt_input=new JTextField(20);
+				
+		p_chat.setLayout(new BorderLayout());
+		p_chat.add(la_desc, BorderLayout.NORTH);
+		p_chat.add(scroll);
+		p_chat.add(txt_input, BorderLayout.SOUTH);
 		
-		add(scroll);
-		add(txt_input);
+		add(p_chat);
 		
 		
 		txt_input.addKeyListener(new KeyAdapter() {

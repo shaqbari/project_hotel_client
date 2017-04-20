@@ -1,0 +1,6 @@
+
+이미지올릴 URL쓸때 다음 주소를 이용하세요
+
+http://pseudoluna.synology.me/experi/images/파일명.확장자
+
+올리실 파일있으면 공유폴더에 올려주시면 제가 서버에 올릴게요.
