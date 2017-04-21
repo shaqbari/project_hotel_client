@@ -1,11 +1,15 @@
 package hotelclient.main;
 
 import java.awt.BorderLayout;
+import java.awt.Checkbox;
+import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -23,13 +27,15 @@ import javax.swing.JTextField;
 
 import hotelclient.ClientMain;
 
-public class CheckAdminPanel extends JPanel implements ActionListener{
+public class CheckAdminPanel extends JPanel implements ActionListener, ItemListener{
 	ClientMain main;
 	Connection con;
 	
-	JPanel p_north, p_input, p_south;
-	JLabel la_title, la_id, la_pw;
+	JPanel p_north, p_input_member, p_south;
 	Font font;
+	JLabel la_title, la_id, la_pw;
+	CheckboxGroup group;
+	Checkbox ch_quest, ch_member;		
 	JTextField txt_id;
 	JPasswordField txt_pw;	
 	JButton bt_check, bt_regist;
@@ -44,9 +50,13 @@ public class CheckAdminPanel extends JPanel implements ActionListener{
 		con=main.con;
 		
 		p_north=new JPanel();
-		p_input=new JPanel();
+		p_input_member=new JPanel();
 		p_south=new JPanel();
-		la_title=new JLabel("호텔예약관리시스템");
+		la_title=new JLabel("호텔서비스시스템 로그인");
+		group=new CheckboxGroup();
+		ch_quest=new Checkbox("비회원", group, true);
+		ch_member=new Checkbox("회원", group, false);
+		
 		la_id=new JLabel("id");
 		la_pw=new JLabel("pw");
 		font=new Font("맑은 고딕", font.PLAIN, 20);
@@ -57,8 +67,8 @@ public class CheckAdminPanel extends JPanel implements ActionListener{
 		
 		this.setLayout(new BorderLayout());
 		
-		p_input.setPreferredSize(new Dimension(400, 100));
-		p_input.setLayout(new GridLayout(2, 2));
+		p_input_member.setPreferredSize(new Dimension(400, 100));
+		p_input_member.setLayout(new GridLayout(2, 2));
 		
 		la_title.setFont(new Font("맑은고딕", font.BOLD, 25));
 		la_id.setFont(font);
@@ -67,17 +77,19 @@ public class CheckAdminPanel extends JPanel implements ActionListener{
 		txt_pw.setFont(font);
 		
 		p_north.add(la_title);
+		p_north.add(ch_quest);
+		p_north.add(ch_member);
 		
-		p_input.add(la_id);
-		p_input.add(txt_id);
-		p_input.add(la_pw);
-		p_input.add(txt_pw);
+		p_input_member.add(la_id);
+		p_input_member.add(txt_id);
+		p_input_member.add(la_pw);
+		p_input_member.add(txt_pw);
 		
 		p_south.add(bt_check);
 		p_south.add(bt_regist);
 				
 		add(p_north, BorderLayout.NORTH);
-		add(p_input);
+		add(p_input_member);
 		add(p_south, BorderLayout.SOUTH);
 
 		txt_pw.addKeyListener(new KeyAdapter() {
@@ -90,6 +102,9 @@ public class CheckAdminPanel extends JPanel implements ActionListener{
 		});
 		bt_check.addActionListener(this);
 		bt_regist.addActionListener(this);
+		
+		ch_quest.addItemListener(this);
+		ch_member.addItemListener(this);
 				
 		
 		setSize(400, 200);
@@ -172,6 +187,10 @@ public class CheckAdminPanel extends JPanel implements ActionListener{
 		}else if(obj==bt_regist){
 			main.setPage(1); //RegAdminPanel보이게 한다.
 		}
+	}
+
+	public void itemStateChanged(ItemEvent e) {
+		
 	}	
 	
 }
