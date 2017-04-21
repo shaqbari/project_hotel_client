@@ -30,7 +30,7 @@ import javax.swing.JTextField;
 import hotelclient.attract.AttractionPanel;
 import hotelclient.chat.ChatPanel;
 import hotelclient.home.HomePanel;
-import hotelclient.main.CheckAdminPanel;
+import hotelclient.main.CheckUserPanel;
 import hotelclient.main.ClockThread;
 import hotelclient.main.DBManager;
 import hotelclient.main.MyButton;
@@ -53,7 +53,7 @@ public class ClientMain extends JFrame implements ActionListener {
 	public Connection con;
 
 	// 윈도우전환에 사용될 객체들
-	CheckAdminPanel checkAdminPanel; // 로그인패널
+	CheckUserPanel checkAdminPanel; // 로그인패널
 	RegAdminPanel regAdminPanel; // 관리자 등록패널
 	JPanel p_container;
 	JPanel[] page = new JPanel[3];
@@ -99,7 +99,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		manager = DBManager.getInstance();
 		con = manager.getConnection();
 		
-		page[0]=checkAdminPanel=new CheckAdminPanel(this);//로그인정보 확인 패널
+		page[0]=checkAdminPanel=new CheckUserPanel(this);//로그인정보 확인 패널
 		page[1]=regAdminPanel=new RegAdminPanel(this);//로그인정보 확인 패널
 		page[2]=p_container = new JPanel();//아래패널을 담을 패널
 		p_north = new JPanel();
