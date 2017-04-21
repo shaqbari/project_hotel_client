@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ClientThread implements Runnable{
 	ClientMain main;
@@ -53,8 +55,9 @@ public class ClientThread implements Runnable{
 			e.printStackTrace();
 		}
 		
-	}	
-	
+	}
+
+	//계속듣고 있는다.
 	public void run() {
 		while(flag){
 			listen();

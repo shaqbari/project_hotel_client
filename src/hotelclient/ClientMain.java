@@ -38,8 +38,8 @@ import hotelclient.resv.ResvPanel;
 import hotelclient.service.ServicePanel;
 
 public class ClientMain extends JFrame implements ActionListener {
-	int room_Number = 203;
-	int hotel_user_id = 4;
+	public int room_Number = 203;
+	public int hotel_user_id = 4;
 
 	// 네트워크에 사용될 객체들
 	public Socket socket;
