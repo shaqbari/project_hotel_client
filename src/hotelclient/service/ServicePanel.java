@@ -25,7 +25,7 @@ public class ServicePanel extends JPanel {
 	Serv_view[] serv_view= new Serv_view[serv_name.length];
 	
 	JLabel label;
-	ImageIcon image;
+	ImageIcon imae;
 	
 	public ServicePanel(ClientMain main) {
 		setLayout(new FlowLayout());
