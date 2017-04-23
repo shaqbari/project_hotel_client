@@ -40,7 +40,7 @@ import hotelclient.service.ServicePanel;
 
 public class ClientMain extends JFrame implements ActionListener {
 	public int room_Number = 203;
-	public int hotel_user_id = 4;
+	public int hotel_user_id =1;
 
 	// 네트워크에 사용될 객체들
 	public Socket socket;
@@ -53,8 +53,8 @@ public class ClientMain extends JFrame implements ActionListener {
 	public Connection con;
 
 	// 윈도우전환에 사용될 객체들
-	CheckUserPanel checkAdminPanel; // 로그인패널
-	RegAdminPanel regAdminPanel; // 관리자 등록패널
+	public CheckUserPanel checkAdminPanel; // 로그인패널
+	public RegAdminPanel regAdminPanel; // 관리자 등록패널
 	JPanel p_container;
 	JPanel[] page = new JPanel[3];
 
@@ -98,7 +98,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		// db연동에 사용될 객체들
 		manager = DBManager.getInstance();
 		con = manager.getConnection();
-		
+			
 		page[0]=checkAdminPanel=new CheckUserPanel(this);//로그인정보 확인 패널
 		page[1]=regAdminPanel=new RegAdminPanel(this);//로그인정보 확인 패널
 		page[2]=p_container = new JPanel();//아래패널을 담을 패널
@@ -239,13 +239,14 @@ public class ClientMain extends JFrame implements ActionListener {
 		}
 		p_center.updateUI();		
 	}
-
+	
+	//로그인 시도할때 호출(로그인버튼 누를때)
 	public void connect(){
 		try {
 			socket = new Socket(ip, port);
 			clientThread = new ClientThread(this);
 			System.out.println("접속성공");
-			bt_connect.setEnabled(false);
+			//bt_connect.setEnabled(false);
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "서버 접속에 실패하였습니다. 잠시후 다시 시도해주십시오");
@@ -264,7 +265,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		if (obj==bt_logout) {
 			setPage(0);
 		}
-		
+				
 		if (obj==bt_home) {			
 			menuVisible(homePanel);
 		}else if (obj==bt_attraction) {

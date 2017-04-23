@@ -33,7 +33,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	Connection con;
 	
 	JPanel p_north, p_input, p_input_guest, p_input_member, p_south;
-	boolean flag=true;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
+	boolean isGuest=true;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
 	Font font;
 		
 	JLabel la_title;
@@ -73,13 +73,13 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		
 		//p_input_guest에 붙을 객체
 		la_resv_id=new JLabel("예약번호 ");
-		txt_resv_id=new JTextField();
+		txt_resv_id=new JTextField("1");
 		la_phone=new JLabel("전화번호 ");
-		txt_phone1=new JTextField();
+		txt_phone1=new JTextField("010");
 		la_phone_spacer1=new JLabel(" -");
-		txt_phone2=new JTextField();
+		txt_phone2=new JTextField("2222");
 		la_phone_spacer2=new JLabel(" -");		
-		txt_phone3=new JTextField();
+		txt_phone3=new JTextField("2222");
 		
 		//p_input_member에 붙을 객체
 		la_id=new JLabel("ID   ");
@@ -214,8 +214,18 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		}		
 	}
 	
-	//아이디 비번 일치하면 hotelMain만 보이게한다.
+	//비회원과 회원에 따라 정보가 일치하면 hotelMain만 보이게한다.
 	public void check(){
+		if (isGuest) {
+			GuestLoginRequest guestLogin=new GuestLoginRequest(main, this);
+			guestLogin.requestJSON();
+		}else {
+			MemberLoginRequest memberLogin=new MemberLoginRequest(main, this);
+			memberLogin.requestJSON();
+		}		
+	}
+	
+	/*public void check(){
 		setHotel_admins();
 		
 		for (int i = 0; i < hotel_admins.size(); i++) {
@@ -239,12 +249,14 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		txt_pw.setText("");
 		txt_id.requestFocus();
 		JOptionPane.showMessageDialog(this, "로그인정보가 정확하지 않습니다.");
-	}
+	}*/
 
 	
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {		
 		Object obj=(Object)e.getSource();
 		if (obj==bt_check) {
+			main.connect();			
+			
 			check();
 		}else if(obj==bt_regist){
 			main.setPage(1); //RegAdminPanel보이게 한다.
@@ -256,11 +268,11 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		if (obj==ch_guest) {
 			p_input_guest.setVisible(true);;
 			p_input_member.setVisible(false);
-			flag=true;
+			isGuest=true;
 		}else if (obj==ch_member) {
 			p_input_guest.setVisible(false);;
 			p_input_member.setVisible(true);
-			flag=false;
+			isGuest=false;
 		}
 		
 	}	

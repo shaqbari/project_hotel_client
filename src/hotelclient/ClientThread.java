@@ -6,8 +6,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.Calendar;
-import java.util.Date;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import hotelclient.chat.ChatNetwork;
+import hotelclient.main.GuestLoginReact;
 
 public class ClientThread implements Runnable{
 	ClientMain main;
@@ -36,10 +41,40 @@ public class ClientThread implements Runnable{
 	
 	public void listen(){
 		try {
-			String msg=buffr.readLine();
-			System.out.println("메시지 도착");
-			main.chatPanel.area.append(msg+"\n");		
+			String msg=buffr.readLine();					
+			JSONObject json=null;		
+			JSONParser parser=new JSONParser();
 			
+			//받은 json msg를 parsing한다.
+			try {
+				json=(JSONObject)parser.parse(msg);					
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}			
+			String responseType=json.get("responseType").toString();
+			
+			//파싱결과 responseType에따라 다른 반응을 한다.
+			if (responseType.equalsIgnoreCase("chat")) {
+				ChatNetwork chatNetwork=new ChatNetwork();
+			
+			}else if (responseType.equalsIgnoreCase("service")) {
+				
+				
+			}else if (responseType.equalsIgnoreCase("resv")) {
+				
+				
+				
+			}else if (responseType.equalsIgnoreCase("guest_login")) {								
+				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);
+				
+			}else if (responseType.equalsIgnoreCase("membership_login")) {
+						
+				
+				
+			}else if(responseType.equalsIgnoreCase("membership_regist")){
+				
+				
+			}
 		
 		} catch (IOException e) {
 			e.printStackTrace();
