@@ -14,11 +14,11 @@ import sun.net.www.content.image.jpeg;
 
 public class HomePanel extends JPanel{
 	ClientMain main;
-	Connection con;
 	
 	JPanel resvInfo;
 	int resvInfoWidth=250;
 	int resvInfoheight=300;
+	Dimension dimension;
 	
 	JLabel title;
 	JLabel resv_id, guest_name, resv_time, stay;
@@ -26,9 +26,9 @@ public class HomePanel extends JPanel{
 	
 	public HomePanel(ClientMain main) {
 		this.main=main;
-		con=main.con;
 		
 		resvInfo=new JPanel();
+		dimension=new Dimension((resvInfoWidth/2)-10, (resvInfoheight/5)-10);
 		title=new JLabel("예약정보 ");
 		resv_id=new JLabel("예약번호 : ");
 		guest_name=new JLabel("이름 : ");
@@ -42,14 +42,14 @@ public class HomePanel extends JPanel{
 			
 		resvInfo.setPreferredSize(new Dimension(resvInfoWidth, resvInfoheight));
 		title.setPreferredSize(new Dimension(resvInfoWidth-10, resvInfoheight/5-10));
-		resv_id.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		guest_name.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		resv_time.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		stay.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		resv_id_input.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		guest_name_input.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		resv_time_input.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
-		stay_input.setPreferredSize(new Dimension(resvInfoWidth/2-10 , resvInfoheight/5-10));
+		resv_id.setPreferredSize(dimension);
+		guest_name.setPreferredSize(dimension);
+		resv_time.setPreferredSize(dimension);
+		stay.setPreferredSize(dimension);
+		resv_id_input.setPreferredSize(dimension);
+		guest_name_input.setPreferredSize(dimension);
+		resv_time_input.setPreferredSize(dimension);
+		stay_input.setPreferredSize(dimension);
 		
 		resvInfo.add(title);
 		resvInfo.add(resv_id);

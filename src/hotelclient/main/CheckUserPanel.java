@@ -27,10 +27,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import hotelclient.ClientMain;
+import hotelclient.network.GuestLoginRequest;
+import hotelclient.network.MemberLoginRequest;
 
 public class CheckUserPanel extends JPanel implements ActionListener, ItemListener{
 	ClientMain main;
-	Connection con;
 	
 	JPanel p_north, p_input, p_input_guest, p_input_member, p_south;
 	boolean isGuest=true;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
@@ -42,12 +43,12 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 
 	//비회원 패널에 붙을 객체들	
 	JLabel la_resv_id, la_phone, la_phone_spacer1, la_phone_spacer2;
-	JTextField txt_resv_id, txt_phone1, txt_phone2, txt_phone3;	
+	public JTextField txt_resv_id, txt_phone1, txt_phone2, txt_phone3;	
 	
 	//회원 패널에 붙을 객체들
 	JLabel la_id, la_pw;
-	JTextField txt_id;
-	JPasswordField txt_pw;	
+	public JTextField txt_id;
+	public JPasswordField txt_pw;	
 	
 	JButton bt_check, bt_regist;
 	
@@ -58,7 +59,6 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	
 	public CheckUserPanel(ClientMain main) {		
 		this.main=main;
-		con=main.con;
 		
 		p_north=new JPanel();
 		p_input=new JPanel(); //회원패널과 비회원패널을 그냥 borderlayout에 붙이면 가장 나중에 붙인거만 나온다. 그러므로 그것을 감쌀수 있는 패널을 만들자
@@ -68,8 +68,8 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		la_title=new JLabel("호텔서비스시스템 로그인");
 		font=new Font("맑은 고딕", font.PLAIN, 24);
 		group=new CheckboxGroup();
-		ch_guest=new Checkbox("비회원", group, false);
-		ch_member=new Checkbox("회원", group, true);
+		ch_guest=new Checkbox("비회원", group, true);
+		ch_member=new Checkbox("회원", group, false);
 		
 		//p_input_guest에 붙을 객체
 		la_resv_id=new JLabel("예약번호 ");
@@ -152,7 +152,6 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		add(p_input);		
 		add(p_south, BorderLayout.SOUTH);
 		
-		p_input_guest.setVisible(false);//처음엔 안보이게
 		
 		txt_pw.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
@@ -168,50 +167,10 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		ch_guest.addItemListener(this);
 		ch_member.addItemListener(this);
 				
+		p_input_member.setVisible(false);//처음엔 안보이게
 		
 		setSize(400, 200);
 		setVisible(true);		
-	}
-	
-	public void setHotel_admins(){
-		PreparedStatement pstmt=null;
-		ResultSet rs=null;
-		
-		String sql="select * from hotel_admin";
-		
-		try {
-			pstmt=con.prepareStatement(sql.toString());
-			rs=pstmt.executeQuery();
-			
-			hotel_admins.removeAll(hotel_admins);//먼저 지운다.
-			
-			while (rs.next()) {
-				Hotel_admin dto=new Hotel_admin();
-				dto.setHotel_admin_id(rs.getString("hotel_admin_id"));
-				dto.setHotel_admin_pw(rs.getNString("hotel_admin_pw"));
-				dto.setHotel_admin_name(rs.getString("hotel_admin_name"));
-				
-				hotel_admins.add(dto);
-			}
-					
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs!=null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			} 
-			if (pstmt!=null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			} 		
-		}		
 	}
 	
 	//비회원과 회원에 따라 정보가 일치하면 hotelMain만 보이게한다.
@@ -224,33 +183,6 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 			memberLogin.requestJSON();
 		}		
 	}
-	
-	/*public void check(){
-		setHotel_admins();
-		
-		for (int i = 0; i < hotel_admins.size(); i++) {
-			if (hotel_admins.get(i).getHotel_admin_id().equals(txt_id.getText())) {//아이디가 일치하면
-				if (hotel_admins.get(i).getHotel_admin_pw().equals(new String(txt_pw.getPassword()))) {//비밀번호가 일치하면
-					this.setVisible(false);	
-					txt_id.setText("");
-					txt_pw.setText("");
-					txt_id.requestFocus();
-					
-					String name=hotel_admins.get(i).getHotel_admin_name();
-					JOptionPane.showMessageDialog(this, name+"님 반갑습니다.");
-					main.la_user.setText(name);
-					main.setPage(2);//hotelmain페이지만 보이게 한다.		
-					return; //pw와 id모두 일치하면 아래가 실행되지 않는다.
-				}
-			}
-		}
-		
-		txt_id.setText("");
-		txt_pw.setText("");
-		txt_id.requestFocus();
-		JOptionPane.showMessageDialog(this, "로그인정보가 정확하지 않습니다.");
-	}*/
-
 	
 	public void actionPerformed(ActionEvent e) {		
 		Object obj=(Object)e.getSource();

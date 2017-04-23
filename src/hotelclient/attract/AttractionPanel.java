@@ -16,7 +16,6 @@ import hotelclient.ClientMain;
 
 public class AttractionPanel extends JPanel{
 	ClientMain main;
-	Connection con;
 	
 	String[][] imgName = {
 		{"jeju_samsung.jpg", "»ï¼ºÇ÷"},	
@@ -34,7 +33,6 @@ public class AttractionPanel extends JPanel{
 	
 	public AttractionPanel(ClientMain main) {
 		this.main=main;
-		con=main.con;
 		/*
 		buttons[0]=bt1=new JButton();
 		buttons[1]=bt2=new JButton();

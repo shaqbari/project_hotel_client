@@ -21,7 +21,6 @@ import hotelclient.ClientMain;
 
 public class RegAdminPanel extends JPanel implements ActionListener {
 	ClientMain main;
-	Connection con;
 	
 	JPanel p_north, p_input, p_south;
 	JLabel la_title, la_serial, la_id, la_pw, la_name;
@@ -34,7 +33,6 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 	
 	public RegAdminPanel(ClientMain main) {
 		this.main = main;
-		con=main.con;
 					
 		p_north = new JPanel();
 		p_input = new JPanel();
@@ -106,38 +104,6 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 	}
 	
 	public boolean check() {		
-		/*if (txt_serial.getText().equals(serial)) {
-			if (txt_id.getText().equals("")!=true) {
-				if (txt_id.getText().getBytes().length>5) {
-					if (new String(txt_pw.getPassword()).equals("")!=true) {
-						if (txt_name.getText().equals("")!=true) {							
-							return true;							
-						}else{
-							JOptionPane.showMessageDialog(this, "이름를 입력해주세요");
-							initialSet();							
-							return false;
-						}						
-					}else{
-						JOptionPane.showMessageDialog(this, "password를 입력해주세요");
-						initialSet();
-						return false;						
-					}					
-				}else{
-					JOptionPane.showMessageDialog(this, "id가 길이가 짧습니다.");
-					initialSet();
-					return false;
-				}
-			} else {
-				JOptionPane.showMessageDialog(this, "id를 입력해주세요");
-				initialSet();
-				return false;
-			} 
-		}else{
-			JOptionPane.showMessageDialog(this, "serial number가 올바르지 않습니다.");
-			initialSet();
-			return false;
-		}*/
-		
 		if (txt_serial.getText().equals(serial)==false) {//이렇게 쓰면 else문을 안써도 된다.
 			JOptionPane.showMessageDialog(this, "serial number가 올바르지 않습니다.");
 			initialSet();
@@ -172,7 +138,7 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 	}
 
 	public void regist() {
-		if (check()) {
+		/*if (check()) {
 			StringBuffer sql=new StringBuffer();
 			sql.append("insert into hotel_admin(hotel_admin_id, hotel_admin_pw, hotel_admin_name)");
 			sql.append("values (?, ?, ?)");
@@ -205,7 +171,7 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 					}					
 				}
 			}			
-		}
+		}*/
 	}
 
 	public void actionPerformed(ActionEvent e) {

@@ -8,7 +8,7 @@ import hotelclient.ClientMain;
 import hotelclient.ClientThread;
 import hotelclient.main.CheckUserPanel;
 
-public class MemberLoginRequest{
+public class MemberRegistRequest{
 	ClientMain main;
 	ClientThread clientThread;
 	String yyyy;
@@ -21,7 +21,7 @@ public class MemberLoginRequest{
 	CheckUserPanel checkUserPanel;
 	String phoneNumber;
 		
-	public MemberLoginRequest(ClientMain main, CheckUserPanel checkUserPanel) {
+	public MemberRegistRequest(ClientMain main, CheckUserPanel checkUserPanel) {
 		this.main=main;
 		this.clientThread=main.clientThread;
 		this.checkUserPanel=checkUserPanel;	

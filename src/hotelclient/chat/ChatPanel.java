@@ -19,7 +19,6 @@ import hotelclient.ClientThread;
 
 public class ChatPanel extends JPanel {
 	ClientMain main;			
-	Connection con;	
 	
 	JPanel p_chat;
 	JLabel la_desc;
@@ -29,8 +28,6 @@ public class ChatPanel extends JPanel {
 	
 	public ChatPanel(ClientMain main) {
 		this.main=main;		
-		
-		this.con=main.con;		
 		
 		p_chat=new JPanel();
 		la_desc=new JLabel("관리자와 채팅");

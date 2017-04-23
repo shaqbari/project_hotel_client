@@ -1,4 +1,4 @@
-package hotelclient.main;
+package hotelclient.network;
 
 import javax.swing.JOptionPane;
 
@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import hotelclient.ClientMain;
 import hotelclient.home.HomePanel;
+import hotelclient.main.CheckUserPanel;
 
 //게스트로그인 서버 응답
 /*	var msgEx1={

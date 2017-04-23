@@ -12,7 +12,9 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import hotelclient.chat.ChatNetwork;
-import hotelclient.main.GuestLoginReact;
+import hotelclient.network.GuestLoginReact;
+import hotelclient.network.MemberLoginReact;
+import hotelclient.network.MemberRegistReact;
 
 public class ClientThread implements Runnable{
 	ClientMain main;
@@ -68,11 +70,11 @@ public class ClientThread implements Runnable{
 				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("membership_login")) {
-						
+				MemberLoginReact memberLoginReact=new MemberLoginReact(main, json);
 				
 				
 			}else if(responseType.equalsIgnoreCase("membership_regist")){
-				
+				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
 				
 			}
 		

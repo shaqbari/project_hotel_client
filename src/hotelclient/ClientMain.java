@@ -67,7 +67,7 @@ public class ClientMain extends JFrame implements ActionListener {
 	JLabel la_admin;
 	public JLabel la_user;
 	public Font font_north, font_content;
-	JButton bt_logout, bt_connect;
+	JButton bt_logout;
 	JButton bt_home, bt_attraction, bt_service, bt_resv, bt_chat; // p_west에 담길 button
 	JButton[] buttons = new JButton[5];
 
@@ -97,8 +97,8 @@ public class ClientMain extends JFrame implements ActionListener {
 	public ClientMain() {		
 		// db연동에 사용될 객체들
 		manager = DBManager.getInstance();
-		con = manager.getConnection();
-			
+		con=manager.getConnection();	
+		
 		page[0]=checkAdminPanel=new CheckUserPanel(this);//로그인정보 확인 패널
 		page[1]=regAdminPanel=new RegAdminPanel(this);//로그인정보 확인 패널
 		page[2]=p_container = new JPanel();//아래패널을 담을 패널
@@ -117,7 +117,6 @@ public class ClientMain extends JFrame implements ActionListener {
 		font_north = new Font("맑은 고딕", Font.BOLD, 30);
 		font_content = new Font("맑은고딕", Font.PLAIN, 20);
 		bt_logout = new JButton("LOGOUT");
-		bt_connect=new JButton("서버접속");
 		
 		//여기서부터는 MyButton에 담겨 p_west에 붙일예정, 관리하기 쉽게 배열에 담는다.
 		buttons[0]=bt_home=new JButton();
@@ -166,7 +165,6 @@ public class ClientMain extends JFrame implements ActionListener {
 		la_admin.setFont(font_content);
 		la_user.setFont(font_content);
 		bt_logout.setFont(font_content);
-		bt_connect.setFont(font_content);
 		
 		p_north_west.setAlignmentX(LEFT_ALIGNMENT);
 		la_hotel.setAlignmentX(LEFT_ALIGNMENT);
@@ -177,7 +175,6 @@ public class ClientMain extends JFrame implements ActionListener {
 		p_north_east.add(la_admin);
 		p_north_east.add(la_user);
 		p_north_east.add(bt_logout);
-		p_north_east.add(bt_connect);
 		
 		p_north.add(p_north_west);		
 		p_north.add(p_north_east);		
@@ -198,7 +195,6 @@ public class ClientMain extends JFrame implements ActionListener {
 		
 		//리스너와의 연결
 		bt_logout.addActionListener(this);
-		bt_connect.addActionListener(this);
 		bt_home.addActionListener(this);
 		bt_attraction.addActionListener(this);
 		bt_resv.addActionListener(this);
@@ -255,12 +251,7 @@ public class ClientMain extends JFrame implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		Object obj=(Object)e.getSource();
-		
-		//접속 버튼 누르면 연결
-		if (obj==bt_connect) {
-			connect();
-		}
-		
+	
 		//로그아웃버튼 누르면 checkAdminPanel보이게 설정
 		if (obj==bt_logout) {
 			setPage(0);

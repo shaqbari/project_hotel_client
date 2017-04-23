@@ -18,7 +18,7 @@ import hotelclient.main.CheckUserPanel;
 	"stay:1		
 }*/
 
-public class MemberLoginReact {
+public class MemberRegistReact {
 	ClientMain main;
 	CheckUserPanel checkUserPanel;
 	HomePanel homePanel;
@@ -35,7 +35,7 @@ public class MemberLoginReact {
 	String mm;
 	String dd;
 	
-	public MemberLoginReact(ClientMain main, JSONObject json) {
+	public MemberRegistReact(ClientMain main, JSONObject json) {
 		this.main=main;
 		this.checkUserPanel=main.checkAdminPanel;
 		this.homePanel=main.homePanel;

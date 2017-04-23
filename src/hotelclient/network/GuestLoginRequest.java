@@ -1,4 +1,4 @@
-package hotelclient.main;
+package hotelclient.network;
 
 import java.util.Calendar;
 
@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import hotelclient.ClientMain;
 import hotelclient.ClientThread;
+import hotelclient.main.CheckUserPanel;
 
 public class GuestLoginRequest{
 	ClientMain main;
