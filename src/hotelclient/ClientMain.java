@@ -35,6 +35,7 @@ import hotelclient.main.ClockThread;
 import hotelclient.main.DBManager;
 import hotelclient.main.MyButton;
 import hotelclient.main.RegAdminPanel;
+import hotelclient.main.XMLParser;
 import hotelclient.resv.ResvPanel;
 import hotelclient.service.ServicePanel;
 
@@ -42,7 +43,10 @@ public class ClientMain extends JFrame implements ActionListener {
 	public int room_Number = 203;
 	public int hotel_user_id =1;
 
-	// 네트워크에 사용될 객체들
+	//설정xml파일 읽는데 쓰일 parser
+	XMLParser parser;
+	
+	// 네트워크에 사용될 객체들 로그인버튼 누를때 사용됨
 	public Socket socket;
 	public ClientThread clientThread;
 	String ip = "localhost";
@@ -83,9 +87,9 @@ public class ClientMain extends JFrame implements ActionListener {
 	// 메뉴선택에 따라 패널전환에 사용될 객체들
 	public HomePanel homePanel;
 	AttractionPanel attractionPanel;
-	ServicePanel servicePanel;
-	ResvPanel resvPanel;
-	ChatPanel chatPanel;
+	public ServicePanel servicePanel;
+	public ResvPanel resvPanel;
+	public ChatPanel chatPanel;
 	JPanel[] p_menus = new JPanel[5];
 
 	// 메뉴선택에 따라 패널전환에 사용될 객체들
@@ -98,6 +102,11 @@ public class ClientMain extends JFrame implements ActionListener {
 		// db연동에 사용될 객체들
 		manager = DBManager.getInstance();
 		con=manager.getConnection();	
+		
+		parser=new XMLParser();
+		room_Number=Integer.parseInt(parser.handler.getMyRoom());
+		ip=parser.handler.getMyIp();
+		port=Integer.parseInt(parser.handler.getMyPort());
 		
 		page[0]=checkAdminPanel=new CheckUserPanel(this);//로그인정보 확인 패널
 		page[1]=regAdminPanel=new RegAdminPanel(this);//로그인정보 확인 패널

@@ -9,10 +9,12 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class MyHandler extends DefaultHandler{
 	
-	String myRoom;
-	String myIp;
-	String myPort;
+	private String myRoom;
+	private String myIp;
+	private String myPort;
 	
+
+
 	boolean room_number;
 	boolean ip;
 	boolean port;
@@ -35,7 +37,7 @@ public class MyHandler extends DefaultHandler{
 	
 		if (room_number) {
 			myRoom=new String(ch, start, length);
-			ip=false;
+			room_number=false;
 		}else if (ip) {
 			myIp=new String(ch, start, length);
 			ip=false;
@@ -43,5 +45,17 @@ public class MyHandler extends DefaultHandler{
 			myPort=new String(ch, start, length);	
 			port=false;
 		}
+	}
+	
+	public String getMyRoom() {
+		return myRoom;
+	}
+	
+	public String getMyIp() {
+		return myIp;
+	}
+	
+	public String getMyPort() {
+		return myPort;
 	}
 }

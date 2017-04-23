@@ -11,7 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import hotelclient.chat.ChatNetwork;
+import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
@@ -57,7 +57,7 @@ public class ClientThread implements Runnable{
 			
 			//파싱결과 responseType에따라 다른 반응을 한다.
 			if (responseType.equalsIgnoreCase("chat")) {
-				ChatNetwork chatNetwork=new ChatNetwork();
+				ChatReact chatReact=new ChatReact(main, json);
 			
 			}else if (responseType.equalsIgnoreCase("service")) {
 				
@@ -71,8 +71,7 @@ public class ClientThread implements Runnable{
 				
 			}else if (responseType.equalsIgnoreCase("membership_login")) {
 				MemberLoginReact memberLoginReact=new MemberLoginReact(main, json);
-				
-				
+								
 			}else if(responseType.equalsIgnoreCase("membership_regist")){
 				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
 				

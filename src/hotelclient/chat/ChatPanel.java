@@ -66,6 +66,15 @@ public class ChatPanel extends JPanel {
 		setVisible(false);	
 	}
 	
+	//채팅의 경우
+	/*{
+		"requestType":"chat",
+		"room_number":203,
+		"requestTime":"2017-04-17-18-19-23",
+		"hotel_user_id":3,
+		"content":"안녕하세요"
+	}*/
+	
 	public void sendChat(String msg){
 		Calendar cal=Calendar.getInstance();
 		String yyyy=Integer.toString(cal.get(Calendar.YEAR));

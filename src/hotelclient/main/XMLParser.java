@@ -15,7 +15,7 @@ public class XMLParser {
 	SAXParserFactory factory;
 	SAXParser parser;
 	URL url;
-	MyHandler handler;
+	public MyHandler handler;
 	
 	public XMLParser() {
 		factory=SAXParserFactory.newInstance();
@@ -36,7 +36,7 @@ public class XMLParser {
 				e.printStackTrace();
 			}
 			
-	
+			System.out.println(handler.getMyRoom());
 	}
 	
 	/*public static void main(String[] args) {

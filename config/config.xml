@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configs>
 	<room>
-		<room_number>203</room_number>
+		<room_number>205</room_number>
 	</room>
 	<server>
 		<ip>localhost</ip>
