@@ -35,17 +35,17 @@ public class Attraction_View extends JPanel implements ActionListener{
 		ImageIcon resizeIcon = new ImageIcon(changeImg);
 		
 		
-		la.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 15));
-		la.setHorizontalTextPosition(la.CENTER);
-		la.setVerticalTextPosition(la.TOP);
+		la.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 17));
+		//la.setHorizontalTextPosition(la.CENTER);
+		//la.setVerticalTextPosition(la.TOP);
 		bt.setPreferredSize(new Dimension(280, 220));
 		bt.setIcon(resizeIcon);
 		
 		bt.addActionListener(this);
 		
-		add(la, BorderLayout.NORTH);
+		add(la);
 	
-		add(bt);
+		add(bt, BorderLayout.SOUTH);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
