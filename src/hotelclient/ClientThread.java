@@ -15,6 +15,7 @@ import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
+import hotelclient.network.ServiceReact;
 
 public class ClientThread implements Runnable{
 	ClientMain main;
@@ -60,7 +61,7 @@ public class ClientThread implements Runnable{
 				ChatReact chatReact=new ChatReact(main, json);
 			
 			}else if (responseType.equalsIgnoreCase("service")) {
-				
+				ServiceReact servReact=new ServiceReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("resv")) {
 				
