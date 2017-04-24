@@ -166,9 +166,11 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		
 		ch_guest.addItemListener(this);
 		ch_member.addItemListener(this);
-				
-		p_input_member.setVisible(false);//처음엔 안보이게
 		
+		bt_login.setEnabled(false);
+		bt_regist.setEnabled(false);
+		p_input_member.setVisible(false);//처음엔 안보이게
+				
 		setSize(400, 200);
 		setVisible(true);		
 	}
@@ -194,6 +196,8 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		}else if (obj==bt_connect) {
 			if(main.connect()){
 				bt_connect.setEnabled(false);
+				bt_login.setEnabled(true);
+				bt_regist.setEnabled(true);
 			}			
 		}
 	}
