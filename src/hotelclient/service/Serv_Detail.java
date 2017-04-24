@@ -82,12 +82,12 @@ public class Serv_Detail extends JFrame implements ActionListener{
 	
 	//db¿¬µ¿
 	public void getList(){
-			PreparedStatement pstmt;
-			ResultSet rs;
+			PreparedStatement pstmt=null;
+			ResultSet rs=null;
 			StringBuffer sql = new StringBuffer();
 			sql.append("select to_char(service_id,'0') as service_id,service_name,service_img,to_char(service_price,'00000') as service_price from service");
 			sql.append(" where service_name="+"'"+serv_name+"'");
-			//System.out.println(sql.toString());
+			System.out.println(sql.toString());
 			try {
 				pstmt=con.prepareStatement(sql.toString());
 				rs=pstmt.executeQuery();

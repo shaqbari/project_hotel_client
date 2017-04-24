@@ -1,5 +1,7 @@
 package hotelclient.attract;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -14,33 +16,34 @@ import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
 
-public class Attraction_View extends JPanel implements ActionListener{
+public class Attraction_View extends JPanel{
 	JButton bt;
 	ClientMain main;
 	ImageIcon icon;
 	JLabel la;
 	URL url;
-
 	
-	public Attraction_View(ClientMain main, String name, JButton bt, URL url) {
-		this.main = main;
+	public Attraction_View(String name, JButton bt, URL url) {
 		this.bt = bt;
 		icon = new ImageIcon(url);
 		la = new JLabel(name);
+		setLayout(new BorderLayout());
 		
-		la.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		setPreferredSize(new Dimension(200, 100));
-		bt.setIcon(icon);
-		
-		bt.addActionListener(this);
-		
+		//버튼에 들어갈 이미지 사이즈 조절
+		Image orignImg = icon.getImage();
+		Image changeImg = orignImg.getScaledInstance(280, 220, Image.SCALE_SMOOTH);
+		ImageIcon resizeIcon = new ImageIcon(changeImg);
+				
+		la.setFont(new Font("맑은 고딕", Font.BOLD, 17));
+		la.setBackground(Color.LIGHT_GRAY);
+		bt.setPreferredSize(new Dimension(280, 220));
+		bt.setIcon(resizeIcon);
+				
 		add(la);
-		add(bt);
+		add(bt, BorderLayout.SOUTH);
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		Object obj = e.getSource();
-		
-	}
 }
+
+
+
