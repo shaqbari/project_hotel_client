@@ -56,15 +56,17 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		buttons[2] = bt_mabang = new JButton();
 		buttons[3] = bt_hanla = new JButton();
 
-		p_center.setBackground(Color.LIGHT_GRAY);
+		p_center.setBackground(Color.DARK_GRAY);
 		p_center.setLayout(new FlowLayout());
 		p_map.setLayout(new BorderLayout());
 		p_map.setPreferredSize(new Dimension(500, 800));
-
+		p_map.setBackground(Color.LIGHT_GRAY);
+		
 		add(p_center);
 		add(p_map, BorderLayout.EAST);
 		
 		la_mapInfo.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		la_mapInfo.setForeground(Color.BLACK);
 		
 		bt_samsung.addActionListener(this);
 		bt_dragon.addActionListener(this);
