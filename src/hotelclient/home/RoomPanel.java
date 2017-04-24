@@ -31,8 +31,7 @@ public class RoomPanel extends JPanel{
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
-			serv_view[i] = new Serv_view(main, buttons[i], url, room_type[i]);
-			add(serv_view[i]);
+		
 		}
 		
 		//add(txt);

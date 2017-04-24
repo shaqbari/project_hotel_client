@@ -7,11 +7,10 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
+
 import java.net.MalformedURLException;
 import java.net.URL;
-=======
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
+
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -19,19 +18,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
-<<<<<<< HEAD
-import hotelclient.service.Serv_view;
-=======
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
 
-public class HomePanel extends JPanel implements ActionListener{
+import hotelclient.service.Serv_view;
+
+public class HomePanel extends JPanel {
 	ClientMain main;
 	
-<<<<<<< HEAD
+
 	JPanel  p_west,p_east, p_south;
-=======
+
 	JPanel p_north, p_center;
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
+
 	JPanel resvInfo;
 	JPanel roomPanel;
 	int resvInfoWidth=250;
@@ -53,17 +50,10 @@ public class HomePanel extends JPanel implements ActionListener{
 	public HomePanel(ClientMain main) {
 		this.main=main;
 		
-<<<<<<< HEAD
+
 		p_west=new JPanel();
 		p_east=new JPanel();
 		p_south=new JPanel();
-		
-=======
-		p_north=new JPanel();
-		p_center=new JPanel();
-		myPage=new JButton("MyPage");
-		option=new JButton("option");
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
 		resvInfo=new JPanel();
 		roomPanel=new JPanel();
 		
@@ -108,12 +98,12 @@ public class HomePanel extends JPanel implements ActionListener{
 		background=new JLabel(new ImageIcon("C:/java_workspace2/ClientPractice/res/hotelimg.jpg"));
 		//background.setPreferredSize(new Dimension(1000, 900));
 		
-<<<<<<< HEAD
+
 		p_west.setPreferredSize(new Dimension(900, 600));
 		p_west.add(background);
 		p_east.add(resvInfo);
 		
-		p_south.add(bt);
+		p_south.add(bt); //객실 버튼을 붙일 예정
 		
 
 		for(int i=0; i<room_type.length; i++){
@@ -131,21 +121,6 @@ public class HomePanel extends JPanel implements ActionListener{
 		add(p_east, BorderLayout.EAST);
 		add(p_south, BorderLayout.SOUTH);
 		//setBackground(Color.CYAN);
-		
-		
-=======
-		p_north.add(myPage);
-		p_north.add(option);
-		p_center.add(background);
-		
-		
-		add(p_north, BorderLayout.NORTH);
-		add(p_center);
-		//setBackground(Color.CYAN);
-		
-		myPage.addActionListener(this);
-		option.addActionListener(this);
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
 		
 		setPreferredSize(new Dimension(1200, 900));
 		setVisible(true);	
@@ -169,23 +144,5 @@ public class HomePanel extends JPanel implements ActionListener{
 		return stay_input;
 	}
 
-<<<<<<< HEAD
 
-=======
-	
-	public void actionPerformed(ActionEvent e) {
-		Object obj=e.getSource();
-		if(obj==myPage){
-			
-			p_center.updateUI();
-			background.setVisible(false);
-			p_north.setVisible(false);
-			p_center.add(resvInfo,BorderLayout.CENTER);
-			
-		}else if(obj==option){
-			
-		}
-		
-	}	
->>>>>>> bf518bf2ba8bf4664b4717d85da8fc020d7a6e6b
 }
