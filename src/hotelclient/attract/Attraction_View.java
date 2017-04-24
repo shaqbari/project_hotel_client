@@ -1,5 +1,6 @@
 package hotelclient.attract;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -22,25 +23,37 @@ public class Attraction_View extends JPanel implements ActionListener{
 	URL url;
 
 	
-	public Attraction_View(ClientMain main, String name, JButton bt, URL url) {
-		this.main = main;
+	public Attraction_View(String name, JButton bt, URL url) {
 		this.bt = bt;
 		icon = new ImageIcon(url);
 		la = new JLabel(name);
+		setLayout(new BorderLayout());
+		
+		//버튼에 들어갈 이미지 사이즈 조절
+		Image orignImg = icon.getImage();
+		Image changeImg = orignImg.getScaledInstance(280, 220, Image.SCALE_SMOOTH);
+		ImageIcon resizeIcon = new ImageIcon(changeImg);
+		
 		
 		la.setFont(new Font("맑은 고딕", Font.BOLD, 15));
-		
-		setPreferredSize(new Dimension(200, 100));
-		bt.setIcon(icon);
+		la.setHorizontalTextPosition(la.CENTER);
+		la.setVerticalTextPosition(la.TOP);
+		bt.setPreferredSize(new Dimension(280, 220));
+		bt.setIcon(resizeIcon);
 		
 		bt.addActionListener(this);
 		
-		add(la);
+		add(la, BorderLayout.NORTH);
+	
 		add(bt);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
 		
-	}
+	}	
+	
 }
+
+
+
