@@ -16,9 +16,9 @@ public class DBManager { //여기서 class는 클래스 생성하는 예약어
 //이파일의 확장자를java로바꾸고db정보입력하세요
 	static private DBManager instance;
 	private String driver="oracle.jdbc.driver.OracleDriver";
-	private String url="jdbc:oracle:thin:@:1521:XE";//@다음에 공유폴더db접속 ip입력하세요
-	private String user="";
-	private String password="";
+	private String url="jdbc:oracle:thin:@211.238.142.108:1521:XE";//@다음에 공유폴더db접속 ip입력하세요
+	private String user="hotelmanager";
+	private String password="manager4";
 	
 	private Connection con;
 	
