@@ -246,15 +246,16 @@ public class ClientMain extends JFrame implements ActionListener {
 	}
 	
 	//로그인 시도할때 호출(로그인버튼 누를때)
-	public void connect(){
+	public boolean connect(){
 		try {
 			socket = new Socket(ip, port);
 			clientThread = new ClientThread(this);
 			System.out.println("접속성공");
-			//bt_connect.setEnabled(false);
+			return true;
 		} catch (IOException e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(this, "서버 접속에 실패하였습니다. 잠시후 다시 시도해주십시오");
+			return false;
 		}
 	}
 	

@@ -36,20 +36,21 @@ public class MemberLoginRequest{
 		ss=Integer.toString(cal.get(Calendar.SECOND));
 	}
 	
-	/*{
-	"requestType":"guest_login",
-	"room_number":204,
-	"requestTime":"2017-04-17-18-19-23", //yyyy-mm-dd-hh24-mi-ss
-	"resv_id":2,
-	"phone":"010-2222-3333"
-}*/	
+	/*
+		var msgEx2={
+			"requestType":"membership_login",
+			"room_number":204,
+			"requestTime":"2017-04-17-18-19-23",
+			"id_to_nick":"minjung",
+			"password":1234
+		}*/
 	public void requestJSON() {						
 		JSONObject json=new JSONObject();
-		json.put("requestType", "guest_login");
+		json.put("requestType", "membership_login");
 		json.put("room_number", main.room_Number);
 		json.put("request_time", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
-		json.put("resv_id", checkUserPanel.txt_resv_id.getText());
-		json.put("phone", phoneNumber);
+		json.put("id_to_nick", checkUserPanel.txt_id.getText());
+		json.put("password", Integer.parseInt(new String(checkUserPanel.txt_pw.getPassword())));
 		
 		String JSONRequest=json.toJSONString();
 		clientThread.send(JSONRequest);		

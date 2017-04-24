@@ -27,13 +27,26 @@ public class MemberLoginReact {
 	
 	String result;
 	int hotel_user_id;
-	String guest_name;
+	String member_name;
+	String resv_id;
 	String resv_time;
 	int stay;
 	
 	String yyyy;
 	String mm;
 	String dd;
+	
+	//게스트로그인 서버 응답
+		/*var msgEx2={
+			"responseType":"membership_login",
+			"result":"yes",
+			"hotel_user_id":1,
+			"member_name":"김민정",
+			"resv_time":"2017-04-17-18-19-23",
+			"stay:1		
+		}*/
+	
+	
 	
 	public MemberLoginReact(ClientMain main, JSONObject json) {
 		this.main=main;
@@ -45,7 +58,8 @@ public class MemberLoginReact {
 		result=json.get("result").toString();
 		if (result.equalsIgnoreCase("yes")) {
 			hotel_user_id=Integer.parseInt(json.get("hotel_user_id").toString());
-			guest_name=json.get("guest_name").toString();
+			member_name=json.get("member_name").toString();
+			resv_id=json.get("resv_id").toString();
 			resv_time=json.get("resv_time").toString();
 			stay=Integer.parseInt(json.get("stay").toString());			
 		}
@@ -55,11 +69,9 @@ public class MemberLoginReact {
 	}
 	
 	public void reset(){
-		checkUserPanel.txt_resv_id.setText("");
-		checkUserPanel.txt_phone1.setText("");
-		checkUserPanel.txt_phone2.setText("");
-		checkUserPanel.txt_phone3.setText("");
-		checkUserPanel.txt_resv_id.requestFocus();		
+		checkUserPanel.txt_id.setText("");
+		checkUserPanel.txt_pw.setText("");
+		checkUserPanel.txt_id.requestFocus();		
 	}
 	
 	public void dateProcess(String resv_time){
@@ -77,12 +89,10 @@ public class MemberLoginReact {
 			System.out.println("로그인에 성공하였습니다.");			
 						
 			dateProcess(resv_time);
-			System.out.println(resv_time);
-			System.out.println(dd);
 			
-			main.la_user.setText(guest_name);	
-			homePanel.getResv_id_input().setText(main.checkAdminPanel.txt_resv_id.getText());
-			homePanel.getGuest_name_input().setText(guest_name);
+			main.la_user.setText(member_name);	
+			homePanel.getResv_id_input().setText(resv_id);
+			homePanel.getGuest_name_input().setText(member_name);
 			homePanel.getResv_time_input().setText(resv_time);
 			
 			//stay가아니라 종료날짜를 따로 db에 입력하자.
@@ -91,7 +101,7 @@ public class MemberLoginReact {
 			
 			reset();
 			main.setPage(2);
-			JOptionPane.showMessageDialog(main, guest_name+"님 반갑습니다.");			
+			JOptionPane.showMessageDialog(main, member_name+"님 반갑습니다.");			
 		}else if (result.equalsIgnoreCase("no")) {
 			System.out.println("로그인에 실패하였습니다.");
 			
