@@ -50,13 +50,10 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	public JTextField txt_id;
 	public JPasswordField txt_pw;	
 	
-	JButton bt_check, bt_regist;
+	JButton bt_login, bt_regist, bt_connect;
 	
 	ArrayList<Hotel_admin>hotel_admins=new ArrayList<Hotel_admin>();
-	
-	String adminId="admin";
-	String adminPw="admin";
-	
+		
 	public CheckUserPanel(ClientMain main) {		
 		this.main=main;
 		
@@ -84,12 +81,13 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		//p_input_member에 붙을 객체
 		la_id=new JLabel("ID   ");
 		la_pw=new JLabel("PW   ");
-		txt_id=new JTextField("admin", 13);
-		txt_pw=new JPasswordField("admin", 13);
+		txt_id=new JTextField("minjung", 13);
+		txt_pw=new JPasswordField("1234", 13);
 		
 		//p_south에 붙을 버튼
-		bt_check=new JButton(" 로그인 ");
+		bt_login=new JButton(" 로그인 ");
 		bt_regist=new JButton("회원가입");
+		bt_connect=new JButton("서버접속");
 		
 		this.setLayout(new BorderLayout());
 		
@@ -145,8 +143,9 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		p_input.add(p_input_guest);
 		p_input.add(p_input_member);
 		
-		p_south.add(bt_check);
+		p_south.add(bt_login);
 		p_south.add(bt_regist);
+		p_south.add(bt_connect);
 		
 		add(p_north, BorderLayout.NORTH);
 		add(p_input);		
@@ -161,8 +160,9 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 				}
 			}
 		});
-		bt_check.addActionListener(this);
+		bt_login.addActionListener(this);
 		bt_regist.addActionListener(this);
+		bt_connect.addActionListener(this);
 		
 		ch_guest.addItemListener(this);
 		ch_member.addItemListener(this);
@@ -179,6 +179,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 			GuestLoginRequest guestLogin=new GuestLoginRequest(main, this);
 			guestLogin.requestJSON();
 		}else {
+			System.out.println("회원로그인이니?");
 			MemberLoginRequest memberLogin=new MemberLoginRequest(main, this);
 			memberLogin.requestJSON();
 		}		
@@ -186,12 +187,14 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	
 	public void actionPerformed(ActionEvent e) {		
 		Object obj=(Object)e.getSource();
-		if (obj==bt_check) {
-			main.connect();			
-			
+		if (obj==bt_login) {			
 			check();
 		}else if(obj==bt_regist){
 			main.setPage(1); //RegAdminPanel보이게 한다.
+		}else if (obj==bt_connect) {
+			if(main.connect()){
+				bt_connect.setEnabled(false);
+			}			
 		}
 	}
 
