@@ -22,7 +22,7 @@ import hotelclient.resv.RoomButton;
 	"stay:1		
 }*/
 
-public class RoomSearchReact {
+public class ResvReact {
 	ClientMain main;
 	ResvPanel resvPanel;
 	
@@ -51,7 +51,7 @@ public class RoomSearchReact {
 			"result":"no",			
 		}*/	
 	
-	public RoomSearchReact(ClientMain main, JSONObject json) {
+	public ResvReact(ClientMain main, JSONObject json) {
 		this.main=main;
 		this.resvPanel=main.resvPanel;
 		this.json=json;

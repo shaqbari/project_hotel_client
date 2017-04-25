@@ -22,7 +22,8 @@ import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
 import hotelclient.home.Room_Option;
-import hotelclient.network.RoomSearchReqeust;
+import hotelclient.network.ResvRequest;
+import hotelclient.network.RoomSearchRequest;
 
 public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	ClientMain main;
@@ -36,7 +37,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	ArrayList<Room_Option> optionInfo=new ArrayList<Room_Option>();
 	
-	public JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_east_resv;
+	public JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_room_title, p_room_button, p_east_resv;
 	
 	//p_center_north에 붙을 예정
 	JLabel desc;
@@ -53,8 +54,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	//p_east_resv에 붙을 예정
 	JLabel la_resv;
-	JLabel la_start, la_start_input, la_end, la_end_input, la_option, la_option_input,  la_room_number, la_room_number_input, la_price, la_price_input;
-	JLabel[] resvInfo =new JLabel[10];
+	JLabel la_start, la_start_input, la_end, la_end_input, la_stay, la_stay_input, la_option, la_option_input,  la_room_number, la_room_number_input, la_price, la_price_input;
+	JLabel[] resvInfo =new JLabel[12];
 	JButton bt_resv;
 	
 	//p_east_room에 붙을 예정
@@ -72,6 +73,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_east=new JPanel();
 		p_east_option=new JPanel();
 		p_east_room=new JPanel();
+		p_room_title=new JPanel();
+		p_room_button=new JPanel();
 		p_east_resv=new JPanel();
 		
 		desc=new JLabel("  1. 날짜를 선택하세요.(해당날짜선택시 당일14:00부터 익일 12:00까지 예약됩니다.)");
@@ -80,14 +83,14 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_center.setPreferredSize(new Dimension(WIDTH*2/3-10, HEIGHT));
 		p_center_north.setPreferredSize(new Dimension(WIDTH*2/3-10, 50));
 		p_east.setPreferredSize(new Dimension(WIDTH/3-10, HEIGHT));
-		p_east_option.setPreferredSize(new Dimension(WIDTH/3, HEIGHT/6-10));
-		p_east_room.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*2/6-10));		
-		p_east_resv.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*3/6-10));
+		p_east_option.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*3/7-10));
+		p_east_room.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*1/7-10));	
+		p_east_resv.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*4/7-10));
 		
 		la_optionSelect=new JLabel("2. 옵션 선택");
 		bt_search=new JButton("잔여 객실 검색");
 		group=new CheckboxGroup();
-		boxs[0]=deluxe=new Checkbox("deluxe", group, true);
+		boxs[0]=deluxe=new Checkbox("deluxe", group, false);
 		boxs[1]=business=new Checkbox("business", group, false);
 		boxs[2]=grand=new Checkbox("grand", group, false);
 		boxs[3]=first=new Checkbox("first", group, false);
@@ -104,12 +107,14 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		resvInfo[1]=la_start_input=new JLabel();
 		resvInfo[2]=la_end=new JLabel("퇴실예약일 : ");
 		resvInfo[3]=la_end_input=new JLabel();
-		resvInfo[4]=la_option=new JLabel("방옵션 : ");
-		resvInfo[5]=la_option_input=new JLabel("deluxe");
-		resvInfo[6]=la_room_number=new JLabel("호실 : ");
-		resvInfo[7]=la_room_number_input=new JLabel();
-		resvInfo[8]=la_price=new JLabel("가격 : ");
-		resvInfo[9]=la_price_input=new JLabel();		
+		resvInfo[4]=la_stay=new JLabel("머무르는기간");
+		resvInfo[5]=la_stay_input=new JLabel();
+		resvInfo[6]=la_option=new JLabel("방옵션 : ");
+		resvInfo[7]=la_option_input=new JLabel();
+		resvInfo[8]=la_room_number=new JLabel("호실 : ");
+		resvInfo[9]=la_room_number_input=new JLabel();
+		resvInfo[10]=la_price=new JLabel("가격 : ");
+		resvInfo[11]=la_price_input=new JLabel();		
 		bt_resv=new JButton("예약");
 		
 		p_center_north.add(bt_refrash);
@@ -121,8 +126,15 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 			p_east_option.add(boxs[i]);
 		}
 		
+		
 		la_room.setPreferredSize(new Dimension(WIDTH/3, 40));
-		p_east_room.add(la_room);
+		p_room_title.add(la_room);
+		
+		p_east_room.setLayout(new BorderLayout());		
+		p_east_room.add(p_room_title, BorderLayout.NORTH);
+		p_east_room.add(p_room_button);
+		
+		
 		
 		la_resv.setPreferredSize(new Dimension(WIDTH/3, 40));
 		p_east_resv.add(la_resv);		
@@ -157,7 +169,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		}
 		
 		p_east_option.setBackground(Color.LIGHT_GRAY);
-		p_east_room.setBackground(Color.LIGHT_GRAY);		
+		p_room_title.setBackground(Color.LIGHT_GRAY);
+		p_room_button.setBackground(Color.LIGHT_GRAY);
 		p_east_resv.setBackground(Color.LIGHT_GRAY);
 		
 		getOptionInfo();
@@ -183,7 +196,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 			boxs[i].setEnabled(false);
 		}
 		//서버에 요청 보낸다.
-		RoomSearchReqeust searchReqeust=new RoomSearchReqeust(main);		
+		RoomSearchRequest searchReqeust=new RoomSearchRequest(main);		
 		searchReqeust.requestJSON(la_start_input.getText(), la_end_input.getText(), la_option_input.getText());
 	}
 	
@@ -232,6 +245,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	}
 	
 	public void resv(){
+		ResvRequest resvRequest=new ResvRequest(main);
+		resvRequest.requestJSON("", "", "");
 		
 	}
 	

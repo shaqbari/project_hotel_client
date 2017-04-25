@@ -8,7 +8,7 @@ import hotelclient.ClientMain;
 import hotelclient.ClientThread;
 import hotelclient.main.CheckUserPanel;
 
-public class RoomSearchReqeust{
+public class ResvRequest{
 	ClientMain main;
 	ClientThread clientThread;
 	String yyyy;
@@ -19,7 +19,7 @@ public class RoomSearchReqeust{
 	String ss;
 	
 		
-	public RoomSearchReqeust(ClientMain main) {
+	public ResvRequest(ClientMain main) {
 		this.main=main;
 		this.clientThread=main.clientThread;
 				
@@ -30,6 +30,8 @@ public class RoomSearchReqeust{
 		hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
 		mi=Integer.toString(cal.get(Calendar.MINUTE));
 		ss=Integer.toString(cal.get(Calendar.SECOND));
+		
+		
 	}
 	
 	/*//방검색요청의 경우

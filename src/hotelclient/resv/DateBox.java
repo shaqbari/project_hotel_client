@@ -24,6 +24,8 @@ public class DateBox extends JPanel {
 	int mm;
 	int dd;
 	
+	int stay;
+	
 	Boolean isClicked=false;//클릭되었는지 아닌지 판단할 변수
 	
 	public DateBox(MyCalendar myCalendar) {
@@ -48,6 +50,8 @@ public class DateBox extends JPanel {
 		setBackground(Color.LIGHT_GRAY);
 		setVisible(true);		
 	}
+	
+	
 
 	
 	public void pop(){		
@@ -61,11 +65,17 @@ public class DateBox extends JPanel {
 				JOptionPane.showMessageDialog(this, yyyy+"년 "+(mm+1)+"월 "+dd+"일");
 				setBackground(Color.GRAY);
 				//한자리인 달이나 일 앞에 0이 없으면 인식하지 못한다. mydateUtil이용
-				if (myCalendar.resvPanel.count==0) {//첫번째 선택시
-					myCalendar.resvPanel.la_start_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-14-00-00");
+				if (myCalendar.resvPanel.count==0) {//첫번째 선택시 해당날과 다음날 출력
+					
+					String thisDate=yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-14-00-00";
+					myCalendar.resvPanel.la_start_input.setText(thisDate);
+					
+					String nextDate=DateUtil.getPlusDate(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-12-00-00", 1);
+					myCalendar.resvPanel.la_end_input.setText(nextDate);
 				
-				}else {//두번째 선택시
-					myCalendar.resvPanel.la_end_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-12-00-00");
+					setStay();
+				}else {//두번째 선택시 다음날만 출력
+					myCalendar.resvPanel.la_end_input.setText(DateUtil.getPlusDate(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-12-00-00", 1));
 					
 					
 					setStay();
@@ -87,11 +97,14 @@ public class DateBox extends JPanel {
 		
 	}
 	
+	//선택한 날짜간 간격 계산
 	public void setStay(){
 		String startDay=myCalendar.resvPanel.la_start_input.getText();
 		String endDay=myCalendar.resvPanel.la_end_input.getText();
 		//14시부터시작해 12시에 끝나므로 하루를 더해줘야 한다.
-		myCalendar.resvPanel.stay=DateUtil.getDiffDate(startDay , endDay)+1;		
+		int stay=myCalendar.resvPanel.stay=DateUtil.getDiffDate(startDay , endDay)+1;
+		
+		myCalendar.resvPanel.la_stay_input.setText(Integer.toString(stay)+"박 "+Integer.toString(stay+1)+"일");
 	}
 	
 	
