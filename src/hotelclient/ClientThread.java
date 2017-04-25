@@ -59,12 +59,12 @@ public class ClientThread implements Runnable{
 			//파싱결과 responseType에따라 다른 반응을 한다.
 			if (responseType.equalsIgnoreCase("chat")) {
 				ChatReact chatReact=new ChatReact(main, json);
-			
+				
 			}else if (responseType.equalsIgnoreCase("service")) {
 				ServiceReact servReact=new ServiceReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("resv")) {
-				
+		
 				
 				
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
