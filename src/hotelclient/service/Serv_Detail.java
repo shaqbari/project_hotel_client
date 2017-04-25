@@ -122,19 +122,19 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		String ss=Integer.toString(cal.get(Calendar.SECOND));
 		
 		//일단은 이렇게..
-		//String msg=service_name;
-		//System.out.println(msg);
+		String msg=serv_name;
+		System.out.println(msg);
 		
 		StringBuffer json = new StringBuffer();
 		json.append("{");
 		json.append("\"requestType\":\"service\",");
 		json.append("\"room_number\":"+main.room_Number+",");
 		json.append("\"requestTime\":\""+yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss+"\",");
-		json.append("\"hotel_user_id\":"+main.hotel_user_id+",");			
-		json.append("\"content\":\""+service_name+"\"");			
-		json.append("}");
+		json.append("\"hotel_user_id\":"+main.hotel_user_id+"");			
+		json.append("\"content\":\""+msg+"\"");			
+		json.append("}");	
 		
-		System.out.println(json.toString());
+		//System.out.println(json.toString());
 		
 		main.clientThread.send(json.toString());
 	}

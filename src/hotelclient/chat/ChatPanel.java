@@ -26,6 +26,10 @@ public class ChatPanel extends JPanel {
 	JScrollPane scroll;
 	JTextField txt_input;
 	
+	Calendar cal;
+	String yyyy, mm, dd, hh24, mi, ss;
+
+	
 	public ChatPanel(ClientMain main) {
 		this.main=main;		
 		
@@ -53,8 +57,15 @@ public class ChatPanel extends JPanel {
 					//메인과 연결시키면 이생성자내에서는 멤버변수로 여겨지기 때문에
 					//내부익명함수내에서 사용할 수 없다.
 					//main.clientThread.sendChat(txt_input.getText());
-					
-					sendChat(txt_input.getText());
+					cal=Calendar.getInstance();
+					yyyy=Integer.toString(cal.get(Calendar.YEAR));
+					 mm=Integer.toString(cal.get(Calendar.MONTH));
+					 dd=Integer.toString(cal.get(Calendar.DATE));
+					 hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
+					 mi=Integer.toString(cal.get(Calendar.MINUTE));
+					 ss=Integer.toString(cal.get(Calendar.SECOND));
+					 
+					sendChat(txt_input.getText()+" "+yyyy+"-"+mm+"-"+dd+" "+hh24+":"+mi+":"+ss);
 					txt_input.setText("");
 					txt_input.requestFocus();
 				}
@@ -76,13 +87,15 @@ public class ChatPanel extends JPanel {
 	}*/
 	
 	public void sendChat(String msg){
-		Calendar cal=Calendar.getInstance();
-		String yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		String mm=Integer.toString(cal.get(Calendar.MONTH));
-		String dd=Integer.toString(cal.get(Calendar.DATE));
-		String hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
-		String mi=Integer.toString(cal.get(Calendar.MINUTE));
-		String ss=Integer.toString(cal.get(Calendar.SECOND));
+		
+		 cal=Calendar.getInstance();
+		yyyy=Integer.toString(cal.get(Calendar.YEAR));
+		 mm=Integer.toString(cal.get(Calendar.MONTH));
+		 dd=Integer.toString(cal.get(Calendar.DATE));
+		 hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
+		 mi=Integer.toString(cal.get(Calendar.MINUTE));
+		 ss=Integer.toString(cal.get(Calendar.SECOND));
+		
 		
 		StringBuffer json=new StringBuffer();
 		json.append("{");
@@ -92,6 +105,8 @@ public class ChatPanel extends JPanel {
 		json.append("\"hotel_user_id\":"+main.hotel_user_id+",");			
 		json.append("\"content\":\""+msg+"\"");			
 		json.append("}");		
+		
+		
 		
 		main.clientThread.send(json.toString());
 	}

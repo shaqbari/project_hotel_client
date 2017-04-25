@@ -15,7 +15,11 @@ import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
+
 import hotelclient.network.RoomSearchReact;
+
+import hotelclient.network.ServiceReact;
+
 
 public class ClientThread implements Runnable{
 	ClientMain main;
@@ -59,15 +63,15 @@ public class ClientThread implements Runnable{
 			//파싱결과 responseType에따라 다른 반응을 한다.
 			if (responseType.equalsIgnoreCase("chat")) {
 				ChatReact chatReact=new ChatReact(main, json);
-			
-			}else if (responseType.equalsIgnoreCase("service")) {
 				
+			}else if (responseType.equalsIgnoreCase("service")) {
+				ServiceReact servReact=new ServiceReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("room_search")) {
 				RoomSearchReact searchReact=new RoomSearchReact(main, json);				
 												
 			}else if (responseType.equalsIgnoreCase("resv")) {
-				
+		
 				
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
 				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);
