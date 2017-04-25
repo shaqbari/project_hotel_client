@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -41,16 +41,14 @@ public class HomePanel extends JPanel {
 	JButton myPage, option;
 	private JLabel resv_id_input, guest_name_input, resv_time_input, stay_input;
 	
-	JButton bt;
+	
 	String[] room_type={"deluxe","business","grand","first","vip","vvip", "sweet"};
+	//ArrayList<Room_Option> list;
 
-	JButton bt_del, bt_bui,bt_grand,bt_fir,bt_vip,bt_vvip, bt_sweet;
-	JButton[] buttons = new JButton[7]; //버튼을 p_south패널에 붙일예정
 	
 	public HomePanel(ClientMain main) {
 		this.main=main;
 		
-
 		p_west=new JPanel();
 		p_east=new JPanel();
 		p_south=new JPanel();
@@ -68,7 +66,7 @@ public class HomePanel extends JPanel {
 		guest_name_input=new JLabel();
 		resv_time_input=new JLabel();
 		stay_input=new JLabel();
-		bt=new JButton("객실");
+		
 			
 		resvInfo.setPreferredSize(new Dimension(resvInfoWidth, resvInfoheight));
 		resvInfo.setBackground(Color.WHITE);
@@ -95,21 +93,26 @@ public class HomePanel extends JPanel {
 		
 		
 		setLayout(new BorderLayout());
-		background=new JLabel(new ImageIcon("C:/java_workspace2/ClientPractice/res/hotelimg.jpg"));
+		background=new JLabel(new ImageIcon("http://pseudoluna.synology.me/experi/images/hilton.jpg"));
 		//background.setPreferredSize(new Dimension(1000, 900));
 		
-
+		
 		p_west.setPreferredSize(new Dimension(900, 600));
 		p_west.add(background);
 		p_east.add(resvInfo);
 		
-		p_south.add(bt); //객실 버튼을 붙일 예정
+		//p_south.add(bt); //RoomPanel을 붙일 예정
 		
-
+		
+		
 		for(int i=0; i<room_type.length; i++){
-			URL url = null;
+			
 			try {
-				url = new URL("http://pseudoluna.synology.me/experi/images/"+room_type[i]+".jpg");
+				URL url = new URL("http://pseudoluna.synology.me/experi/images/"+room_type[i]+".jpg");
+				RoomPanel roomPanel=new RoomPanel(url, this);
+			//	list=new ArrayList<Room_Option>();
+				
+				p_south.add(roomPanel);
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}

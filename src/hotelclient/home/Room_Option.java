@@ -1,7 +1,6 @@
 package hotelclient.home;
 
-//RoomOption테이블의 record를 담을 dto
-public class RoomOption {
+public class Room_Option {
 	private int room_option_id;
 	private String room_option_name;
 	private int room_option_size;
@@ -10,6 +9,10 @@ public class RoomOption {
 	private int room_option_max;
 	private String room_option_img;
 	private int room_option_price;
+	
+	private int room_number;
+	private int room_floor;
+	
 	
 	public int getRoom_option_id() {
 		return room_option_id;
@@ -59,6 +62,17 @@ public class RoomOption {
 	public void setRoom_option_price(int room_option_price) {
 		this.room_option_price = room_option_price;
 	}
-	
+	public int getRoom_number() {
+		return room_number;
+	}
+	public void setRoom_number(int room_number) {
+		this.room_number = room_number;
+	}
+	public int getRoom_floor() {
+		return room_floor;
+	}
+	public void setRoom_floor(int room_floor) {
+		this.room_floor = room_floor;
+	}
 	
 }
