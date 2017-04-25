@@ -31,15 +31,19 @@ public class AttractionPanel extends JPanel implements ActionListener {
 	JButton bt_samsung, bt_dragon, bt_mabang, bt_hanla;
 	JButton[] buttons = new JButton[4];
 	Attraction_View[] attView = new Attraction_View[imgName.length];
-
-	JPanel p_center, p_map;
-	JLabel la_mapInfo;
+	JButton bt_zoomIn, bt_zoomOut;
+	
+	JPanel p_center, p_map, p_zoom;
+	JLabel la_mapInfo, la_zoom;
 
 	// 지도 기본 위도, 경도, 생성이미지 명
 	String latitude = "33.249476";
 	String longitude = "126.408080";
 	String img = "map_main.jpg";
-
+	
+	//지도 줌인 줌아웃을 위한 변수
+	int zoomNum=17;
+	
 	// 클릭시 링크연결을 위한 변수선언
 	String str;
 
@@ -49,12 +53,18 @@ public class AttractionPanel extends JPanel implements ActionListener {
 
 		p_center = new JPanel();
 		p_map = new JPanel();
+		p_zoom = new JPanel();
 		la_mapInfo = new JLabel();
+		la_zoom = new JLabel("지도 크기조정");
 		
 		buttons[0] = bt_samsung = new JButton();
 		buttons[1] = bt_dragon = new JButton();
 		buttons[2] = bt_mabang = new JButton();
 		buttons[3] = bt_hanla = new JButton();
+		
+		//지도 줌인, 줌아웃
+		bt_zoomIn = new JButton("+");
+		bt_zoomOut = new JButton("-");
 
 		p_center.setBackground(Color.DARK_GRAY);
 		p_center.setLayout(new FlowLayout());
@@ -62,16 +72,26 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.setPreferredSize(new Dimension(500, 800));
 		p_map.setBackground(Color.LIGHT_GRAY);
 		
+		p_zoom.add(bt_zoomOut);
+		p_zoom.add(la_zoom);
+		p_zoom.add(bt_zoomIn);
+		
 		add(p_center);
 		add(p_map, BorderLayout.EAST);
 		
 		la_mapInfo.setFont(new Font("맑은 고딕", Font.BOLD, 20));
 		la_mapInfo.setForeground(Color.BLACK);
+		la_mapInfo.setText("<html><br> 신라호텔에 오신 것을 환영합니다. <br> ㆍ 주소 : 제주특별자치도 서귀포시 색달동 중문관광로72번길 75 <br> ㆍ 전화번호 : 064-735-5114 </html>");
+		
+		la_zoom.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		la_zoom.setForeground(Color.BLACK);
 		
 		bt_samsung.addActionListener(this);
 		bt_dragon.addActionListener(this);
 		bt_mabang.addActionListener(this);
 		bt_hanla.addActionListener(this);
+		bt_zoomIn.addActionListener(this);
+		bt_zoomOut.addActionListener(this);
 
 		p_map.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -106,9 +126,8 @@ public class AttractionPanel extends JPanel implements ActionListener {
 	public void createMap() {
 		try {
 			String imageUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + latitude + "," + longitude
-					+ "&zoom=17&size=612x612&scale=2&maptype=roadmap";
+					+ "&zoom="+zoomNum+"&size=612x612&scale=2&maptype=roadmap";
 			String destinationFile = img;
-			
 			URL url = new URL(imageUrl);
 			InputStream is = url.openStream();
 			OutputStream os = new FileOutputStream(destinationFile);
@@ -125,6 +144,7 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		ImageIcon imageIcon = new ImageIcon((new ImageIcon(img)).getImage().getScaledInstance(500, 600, Image.SCALE_SMOOTH));
 		p_map.add(new JLabel(imageIcon), BorderLayout.NORTH);		//지도 붙이기
 		p_map.add(la_mapInfo);
+		p_map.add(p_zoom, BorderLayout.SOUTH);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -137,6 +157,14 @@ public class AttractionPanel extends JPanel implements ActionListener {
 			mabang();
 		} else if (obj == bt_hanla) { // 한라수목원
 			hanla();
+		} else if (obj == bt_zoomIn) { // 한라수목원
+			zoomNum++;
+			p_map.removeAll();
+			createMap();
+		} else if (obj == bt_zoomOut) { // 한라수목원
+			zoomNum--;
+			p_map.removeAll();
+			createMap();
 		}
 	}
 
