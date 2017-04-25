@@ -12,14 +12,13 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import hotelclient.ClientMain;
 
 
 public class RoomPanel extends JPanel{
@@ -30,13 +29,18 @@ public class RoomPanel extends JPanel{
 	BufferedImage image;
 	URL url;
 	int width=120; int height=150;
-	String[] room_type={"deluxe","business","grand","first","vip","vvip", "sweet"};
-	ArrayList<Room_Option> list;	
-
+	//String[] room_type={"deluxe","business","grand","first","vip","vvip", "sweet"};
+	ArrayList<Room_Option> list;
+	String room_type;	
+	ClientMain main;
+	Connection con;
 	
-	public RoomPanel(URL url, HomePanel home) {
+	public RoomPanel(URL url, HomePanel home,String room_type) {
 		this.url=url;
 		this.home=home;
+		this.room_type=room_type;
+		main=home.main;
+		con=main.con;
 		
 		try {
 			image=ImageIO.read(url);
@@ -51,11 +55,13 @@ public class RoomPanel extends JPanel{
 		};
 		
 
-		for(int i=0; i<room_type.length; i++){
+		/*for(int i=0; i<room_type.length; i++){
 			la=new JLabel(room_type[i]);
 			
-		}
+		}*/
 		
+		la=new JLabel(room_type);
+
 		//bt_detail=new JButton("+");
 		
 		setLayout(new BorderLayout());
@@ -73,7 +79,7 @@ public class RoomPanel extends JPanel{
 		la.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				
-					new Room_Detail();
+					new Room_Detail(con,room_type);
 				}
 			
 		});

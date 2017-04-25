@@ -96,7 +96,6 @@ public class HomePanel extends JPanel {
 		try {
 			background=new JLabel(new ImageIcon(new URL("http://pseudoluna.synology.me/experi/images/hilton.jpg")));
 		} catch (MalformedURLException e1) {
-
 			e1.printStackTrace();
 		}
 		//background.setPreferredSize(new Dimension(1000, 900));
@@ -114,7 +113,7 @@ public class HomePanel extends JPanel {
 			
 			try {
 				URL url = new URL("http://pseudoluna.synology.me/experi/images/"+room_type[i]+".jpg");
-				RoomPanel roomPanel=new RoomPanel(url, this);
+				RoomPanel roomPanel=new RoomPanel(url, this,room_type[i]);
 			//	list=new ArrayList<Room_Option>();
 				
 				p_south.add(roomPanel);
