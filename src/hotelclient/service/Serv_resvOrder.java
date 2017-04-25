@@ -20,14 +20,14 @@ import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
 
-public class Serv_Detail extends JFrame implements ActionListener{
+public class Serv_resvOrder extends JFrame implements ActionListener{
 	ClientMain main;
 	Connection con;
 	JPanel p_info,p_order;
 	String serv_name;
 	JLabel la_name,la_price;
 	ImageIcon icon;
-	JButton bt,bt_order,bt_resvOrder;
+	JButton bt,bt_confirm;
 	ArrayList<Service> service = new ArrayList<Service>();
 	
 	String service_id;
@@ -35,7 +35,7 @@ public class Serv_Detail extends JFrame implements ActionListener{
 	String service_img;
 	String service_price;
 	
-	public Serv_Detail(ClientMain main,String serv_name,ImageIcon icon) {
+	public Serv_resvOrder(ClientMain main,String serv_name,ImageIcon icon) {
 		this.main=main;
 		this.setLayout(new BorderLayout());
 		this.serv_name=serv_name;
@@ -65,19 +65,19 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		p_info.add(la_price);
 		
 		//p_order
-		bt_order = new JButton("주문");
-		bt_resvOrder = new JButton("예약주문");
-		p_order.add(bt_order);
-		p_order.add(bt_resvOrder);
+		bt_confirm = new JButton("확인/예약");
+		//bt_resvOrder = new JButton("예약주문");
+		p_order.add(bt_confirm);
+		//p_order.add(bt_resvOrder);
 		
 		add(p_info,BorderLayout.CENTER);
 		add(p_order,BorderLayout.SOUTH);
 		
-		bt_order.addActionListener(this);
-		bt_resvOrder.addActionListener(this);
+		bt_confirm.addActionListener(this);
+		//bt_resvOrder.addActionListener(this);
 		
 		setVisible(true);
-		setSize(new Dimension(500,400));
+		setSize(new Dimension(300,600));
 	}
 	
 	//db연동
@@ -139,18 +139,11 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		main.clientThread.send(json.toString());
 	}
 	
-	//예약주문 , 서비스 선택 후 예약일시 정하면 예약주문 가능
-	public void resvOrder(){
-		Serv_resvOrder resv = new Serv_resvOrder(main, serv_name, icon);
-		
-	}
-	
+	//확인_예약버튼 누르면 예약이 완료된다.
 	public void actionPerformed(ActionEvent e) {
 		Object obj=e.getSource();
-		if(obj==bt_order){
+		if(obj==bt_confirm){
 			order();
-		}else if(obj==bt_resvOrder){
-			resvOrder();
 		}
 	}
 

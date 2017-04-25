@@ -36,10 +36,10 @@ public class Serv_view extends JPanel{
 		icon = new ImageIcon(url);
 		la = new JLabel(serv_name);
 		
-		la.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		la.setFont(new Font("Georgia", Font.BOLD, 20));
 
-		setPreferredSize(new Dimension(250, 300));
-		bt.setPreferredSize(new Dimension(350, 250));
+		setPreferredSize(new Dimension(350,320));
+		bt.setPreferredSize(new Dimension(400,280));
 		bt.setIcon(icon);
 		
 		bt.setBorderPainted(false);
