@@ -93,7 +93,11 @@ public class HomePanel extends JPanel {
 		
 		
 		setLayout(new BorderLayout());
-		background=new JLabel(new ImageIcon("http://pseudoluna.synology.me/experi/images/hilton.jpg"));
+		try {
+			background=new JLabel(new ImageIcon(new URL("http://pseudoluna.synology.me/experi/images/hilton.jpg")));
+		} catch (MalformedURLException e1) {
+			e1.printStackTrace();
+		}
 		//background.setPreferredSize(new Dimension(1000, 900));
 		
 		
