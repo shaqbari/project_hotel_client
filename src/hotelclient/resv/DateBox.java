@@ -61,10 +61,14 @@ public class DateBox extends JPanel {
 				JOptionPane.showMessageDialog(this, yyyy+"년 "+(mm+1)+"월 "+dd+"일");
 				setBackground(Color.GRAY);
 				//한자리인 달이나 일 앞에 0이 없으면 인식하지 못한다. mydateUtil이용
-				if (myCalendar.resvPanel.count==0) {
+				if (myCalendar.resvPanel.count==0) {//첫번째 선택시
 					myCalendar.resvPanel.la_start_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-14-00-00");
-				}else {
+				
+				}else {//두번째 선택시
 					myCalendar.resvPanel.la_end_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-12-00-00");
+					
+					
+					setStay();
 				}
 				
 				myCalendar.resvPanel.count++;
@@ -81,6 +85,13 @@ public class DateBox extends JPanel {
 		}
 		
 		
+	}
+	
+	public void setStay(){
+		String startDay=myCalendar.resvPanel.la_start_input.getText();
+		String endDay=myCalendar.resvPanel.la_end_input.getText();
+		//14시부터시작해 12시에 끝나므로 하루를 더해줘야 한다.
+		myCalendar.resvPanel.stay=DateUtil.getDiffDate(startDay , endDay)+1;		
 	}
 	
 	

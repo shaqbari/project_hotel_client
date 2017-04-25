@@ -10,23 +10,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
+import hotelclient.home.Room_Option;
 import hotelclient.network.RoomSearchReqeust;
 
 public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	ClientMain main;
-	
+	Connection con;
 	int count=0; //달력클릭할때마다 증가할 변수 두번만 선택할수 있게 한다!
+	int stay=1; //머무를 날자
 	
 	public static final int WIDTH=1100;
 	public static final int  HEIGHT=900;
 	
 	
+	ArrayList<Room_Option> optionInfo=new ArrayList<Room_Option>();
 	
 	public JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_east_resv;
 	
@@ -57,6 +65,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	public ResvPanel(ClientMain main) {
 		this.main=main;
+		con=main.con;
 		
 		p_center=new JPanel();
 		p_center_north=new JPanel();
@@ -151,6 +160,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_east_room.setBackground(Color.LIGHT_GRAY);		
 		p_east_resv.setBackground(Color.LIGHT_GRAY);
 		
+		getOptionInfo();
+		
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setVisible(false);	
 	}
@@ -174,6 +185,50 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		//서버에 요청 보낸다.
 		RoomSearchReqeust searchReqeust=new RoomSearchReqeust(main);		
 		searchReqeust.requestJSON(la_start_input.getText(), la_end_input.getText(), la_option_input.getText());
+	}
+	
+	public void getOptionInfo(){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String sql="select * from room_option";
+		
+		try {
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while (rs.next()) {
+				Room_Option dto=new Room_Option();
+				dto.setRoom_option_id(rs.getInt("Room_option_id"));
+				dto.setRoom_option_name(rs.getString("Room_option_name"));
+				dto.setRoom_option_size(rs.getInt("Room_option_size"));
+				dto.setRoom_option_bed(rs.getString("Room_option_bed"));
+				dto.setRoom_option_view(rs.getString("Room_option_view"));
+				dto.setRoom_option_max(rs.getInt("Room_option_max"));
+				dto.setRoom_option_img(rs.getString("Room_option_img"));
+				dto.setRoom_option_price(rs.getInt("Room_option_price"));
+				
+				optionInfo.add(dto);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if (rs!=null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (pstmt!=null) {
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
 	}
 	
 	public void resv(){
