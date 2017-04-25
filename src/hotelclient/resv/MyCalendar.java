@@ -83,7 +83,8 @@ public class MyCalendar extends JPanel implements ActionListener{
 		System.out.println("호출되나?");
 		
 		//현재 날짜를 라벨에 출력
-		la_title.setText(yyyy+"-"+(mm+1));		
+		//한자리인 달이나 일 앞에 0이 없으면 인식하지 못한다. mydateUtil이용
+		la_title.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1)));		
 		
 		//사각형모두 날리기!
 		p_center.removeAll();
@@ -113,7 +114,8 @@ public class MyCalendar extends JPanel implements ActionListener{
 			
 			if (num!=0) {
 				if (num<=lastDay) {
-					box[i].la.setText(Integer.toString(num));
+					//한자리인 달이나 일 앞에 0이 없으면 인식하지 못한다. mydateUtil이용
+					box[i].la.setText(DateUtil.getDateString(Integer.toString(num)));
 				}
 			}else{
 				box[i].la.setText("");					
