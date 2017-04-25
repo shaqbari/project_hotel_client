@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
-import hotelclient.home.RoomOption;
+import hotelclient.home.Room_Option;
 import hotelclient.network.RoomSearchReqeust;
 
 public class ResvPanel extends JPanel implements ActionListener, ItemListener{
@@ -34,7 +34,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	public static final int  HEIGHT=900;
 	
 	
-	ArrayList<RoomOption> optionInfo=new ArrayList<RoomOption>();
+	ArrayList<Room_Option> optionInfo=new ArrayList<Room_Option>();
 	
 	public JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_east_resv;
 	
@@ -197,7 +197,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 			rs=pstmt.executeQuery();
 			
 			while (rs.next()) {
-				RoomOption dto=new RoomOption();
+				Room_Option dto=new Room_Option();
 				dto.setRoom_option_id(rs.getInt("Room_option_id"));
 				dto.setRoom_option_name(rs.getString("Room_option_name"));
 				dto.setRoom_option_size(rs.getInt("Room_option_size"));

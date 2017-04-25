@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 
 import hotelclient.ClientMain;
-import hotelclient.home.RoomOption;
+import hotelclient.home.Room_Option;
 
 public class RoomButton extends JButton implements ActionListener{
 	ClientMain main;
 	ResvPanel resvPanel;
-	ArrayList<RoomOption> optionInfo;
+	ArrayList<Room_Option> optionInfo;
 	
 	int stay;
 	String option;
