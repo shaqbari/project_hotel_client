@@ -96,10 +96,7 @@ public class HomePanel extends JPanel {
 		try {
 			background=new JLabel(new ImageIcon(new URL("http://pseudoluna.synology.me/experi/images/hilton.jpg")));
 		} catch (MalformedURLException e1) {
-<<<<<<< HEAD
-			// TODO Auto-generated catch block
-=======
->>>>>>> ad7b8e9ed45c4773e947d0eb1542bc8e1c879fcc
+
 			e1.printStackTrace();
 		}
 		//background.setPreferredSize(new Dimension(1000, 900));
