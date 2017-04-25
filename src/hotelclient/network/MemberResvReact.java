@@ -12,17 +12,8 @@ import hotelclient.ClientMain;
 import hotelclient.resv.ResvPanel;
 import hotelclient.resv.RoomButton;
 
-//게스트로그인 서버 응답
-/*	var msgEx1={
-	"responseType":"guest_login",
-	"result":"yes",
-	"hotel_user_id":1,
-	"geust_name":"김성현",
-	"resv_time":"2017-04-17-18-19-23",
-	"stay:1		
-}*/
 
-public class ResvReact {
+public class MemberResvReact {
 	ClientMain main;
 	ResvPanel resvPanel;
 	
@@ -36,54 +27,37 @@ public class ResvReact {
 	String dd;
 	
 
-	/*//방검색응답의 경우
-	var msgExRommSearchResponse={
-		"responseType":"room_search",
+	/*	//회원 방예약 응답
+	var msgExMemberResv2{		
+		"responseType":"member_resv",
 		"result":"yes",
-		"available_room":[
-			"203", "303", "403"
-		]
+		"resv_id":"24"
+		s
+	}	
+	var msgExMemberResv2{		
+		"responseType":"member_resv",
+		"result":"no"
 	}
-	
-	//방이 없는경우
-	var msgExRommSearchResponse2={
-			"responseType":"room_search",
-			"result":"no",			
-		}*/	
-	
-	public ResvReact(ClientMain main, JSONObject json) {
+*/	
+	public MemberResvReact(ClientMain main, JSONObject json) {
 		this.main=main;
 		this.resvPanel=main.resvPanel;
 		this.json=json;
-		
-		
 		result=json.get("result").toString();
-		if (result.equalsIgnoreCase("yes")) {
-			JSONArray roomNum=(JSONArray) json.get("available_room");
-			for (int i = 0; i < roomNum.size(); i++) {
-				available_room.add(roomNum.get(i).toString());
-			}
-		}
-		
+			
 		react();
 		
 	}
 	
 	public void react() {
 		if (result.equalsIgnoreCase("yes")) {
-			System.out.println("방이 있습니다.");			
-			resvPanel.p_room_button.removeAll();//먼저지우고 추가한다.
-			resvPanel.p_room_button.updateUI();
-			
-			
-			for (int i = 0; i < available_room.size(); i++) {
-				resvPanel.p_room_button.add(new RoomButton(main, available_room.get(i)));
-			}
-			
-			
+			System.out.println("예약완료");			
+		
+			JOptionPane.showMessageDialog(main, "예약에 성공했습니다.\n예약번호 : "+json.get("resv_id").toString());
+			main.resvPanel.refrash();
 		}else if (result.equalsIgnoreCase("no")) {
-			System.out.println("방이 없습니다.");			
-			JOptionPane.showMessageDialog(main, "조건을 만족하는 방이 없습니다.");
+			JOptionPane.showMessageDialog(main, "예약에 실패했습니다. 다시 시도해주시기 바랍니다.");
+			main.resvPanel.refrash();
 		}		
 		
 	}

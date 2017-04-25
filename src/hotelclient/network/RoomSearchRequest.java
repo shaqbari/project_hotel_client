@@ -36,6 +36,7 @@ public class RoomSearchRequest{
 		var msgExRoomSearch={
 			"requestType":"room_search",
 			"room_number":403,
+			"requestTime":"2017-05-03-18-19-23",
 			"start":"2017-05-04",
 			"end":"2017-05-05",
 			"option":"vip"				
@@ -44,7 +45,7 @@ public class RoomSearchRequest{
 		JSONObject json=new JSONObject();
 		json.put("requestType", "room_search");
 		json.put("room_number", main.room_Number);
-		json.put("request_time", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
+		json.put("requestTime", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
 		json.put("start", start);
 		json.put("end", end);
 		json.put("option", option);

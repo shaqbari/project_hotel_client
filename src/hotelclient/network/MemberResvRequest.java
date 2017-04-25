@@ -3,12 +3,11 @@ package hotelclient.network;
 import java.util.Calendar;
 
 import org.json.simple.JSONObject;
-
+import hotelclient.resv.DateUtil;
 import hotelclient.ClientMain;
 import hotelclient.ClientThread;
-import hotelclient.main.CheckUserPanel;
 
-public class ResvRequest{
+public class MemberResvRequest{
 	ClientMain main;
 	ClientThread clientThread;
 	String yyyy;
@@ -19,37 +18,42 @@ public class ResvRequest{
 	String ss;
 	
 		
-	public ResvRequest(ClientMain main) {
+	public MemberResvRequest(ClientMain main) {
 		this.main=main;
 		this.clientThread=main.clientThread;
 				
 		Calendar cal=Calendar.getInstance();
 		yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		mm=Integer.toString(cal.get(Calendar.MONTH));
-		dd=Integer.toString(cal.get(Calendar.DATE));
-		hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
-		mi=Integer.toString(cal.get(Calendar.MINUTE));
-		ss=Integer.toString(cal.get(Calendar.SECOND));
+		mm=DateUtil.getDateString(Integer.toString(cal.get(Calendar.MONTH)));
+		dd=DateUtil.getDateString(Integer.toString(cal.get(Calendar.DATE)));
+		hh24=DateUtil.getDateString(Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
+		mi=DateUtil.getDateString(Integer.toString(cal.get(Calendar.MINUTE)));
+		ss=DateUtil.getDateString(Integer.toString(cal.get(Calendar.SECOND)));
 		
 		
 	}
 	
-	/*//방검색요청의 경우
-		var msgExRoomSearch={
-			"requestType":"room_search",
-			"room_number":403,
-			"start":"2017-05-04",
-			"end":"2017-05-05",
-			"option":"vip"				
+	/*//회원 방예약의 경우
+		var msgExResv={
+			"room_number":303,
+			"reqeustType":"member_resv",
+			"requestTime":"2017-04-17-18-19-23",
+			"hotel_user_id":8,
+			"resv_room_number": 602,
+			"resv_time":"2017-04-20-14-00-00",
+			"end_time":"2017-04-23-12-00-00",
+			"stay":3
 		}*/
-	public void requestJSON(String start, String end, String option) {						
+	public void requestJSON(int hotel_user_id, int resv_room_number, String start, String end, int stay) {						
 		JSONObject json=new JSONObject();
-		json.put("requestType", "room_search");
 		json.put("room_number", main.room_Number);
-		json.put("request_time", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
-		json.put("start", start);
-		json.put("end", end);
-		json.put("option", option);
+		json.put("requestType", "member_resv");
+		json.put("requestTime", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
+		json.put("hotel_user_id", main.hotel_user_id);
+		json.put("resv_room_number", resv_room_number);		
+		json.put("resv_time", start);		
+		json.put("end_time", end);
+		json.put("stay", stay);
 		
 		String JSONRequest=json.toJSONString();
 		System.out.println(JSONRequest);

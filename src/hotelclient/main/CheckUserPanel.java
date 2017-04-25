@@ -34,7 +34,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	ClientMain main;
 	
 	JPanel p_north, p_input, p_input_guest, p_input_member, p_south;
-	boolean isGuest=true;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
+	boolean isGuest=false;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
 	Font font;
 		
 	JLabel la_title;
@@ -65,8 +65,8 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		la_title=new JLabel("호텔서비스시스템 로그인");
 		font=new Font("맑은 고딕", font.PLAIN, 24);
 		group=new CheckboxGroup();
-		ch_guest=new Checkbox("비회원", group, true);
-		ch_member=new Checkbox("회원", group, false);
+		ch_guest=new Checkbox("비회원", group, false);
+		ch_member=new Checkbox("회원", group, true);
 		
 		//p_input_guest에 붙을 객체
 		la_resv_id=new JLabel("예약번호 ");
@@ -169,7 +169,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 		
 		bt_login.setEnabled(false);
 		bt_regist.setEnabled(false);
-		p_input_member.setVisible(false);//처음엔 안보이게
+		p_input_guest.setVisible(false);//처음엔 안보이게
 				
 		setSize(400, 200);
 		setVisible(true);		

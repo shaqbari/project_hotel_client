@@ -18,11 +18,12 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
 import hotelclient.home.Room_Option;
-import hotelclient.network.ResvRequest;
+import hotelclient.network.MemberResvRequest;
 import hotelclient.network.RoomSearchRequest;
 
 public class ResvPanel extends JPanel implements ActionListener, ItemListener{
@@ -90,7 +91,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		la_optionSelect=new JLabel("2. 옵션 선택");
 		bt_search=new JButton("잔여 객실 검색");
 		group=new CheckboxGroup();
-		boxs[0]=deluxe=new Checkbox("deluxe", group, false);
+		boxs[0]=deluxe=new Checkbox("deluxe", group, true);
 		boxs[1]=business=new Checkbox("business", group, false);
 		boxs[2]=grand=new Checkbox("grand", group, false);
 		boxs[3]=first=new Checkbox("first", group, false);
@@ -110,7 +111,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		resvInfo[4]=la_stay=new JLabel("머무르는기간");
 		resvInfo[5]=la_stay_input=new JLabel();
 		resvInfo[6]=la_option=new JLabel("방옵션 : ");
-		resvInfo[7]=la_option_input=new JLabel();
+		resvInfo[7]=la_option_input=new JLabel("deluxe");
 		resvInfo[8]=la_room_number=new JLabel("호실 : ");
 		resvInfo[9]=la_room_number_input=new JLabel();
 		resvInfo[10]=la_price=new JLabel("가격 : ");
@@ -195,6 +196,10 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		for (int i = 0; i < boxs.length; i++) {
 			boxs[i].setEnabled(false);
 		}
+		
+		//검색버튼도 막는다.
+		bt_search.setEnabled(false);
+		
 		//서버에 요청 보낸다.
 		RoomSearchRequest searchReqeust=new RoomSearchRequest(main);		
 		searchReqeust.requestJSON(la_start_input.getText(), la_end_input.getText(), la_option_input.getText());
@@ -245,9 +250,23 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	}
 	
 	public void resv(){
-		ResvRequest resvRequest=new ResvRequest(main);
-		resvRequest.requestJSON("", "", "");
+		MemberResvRequest resvRequest=new MemberResvRequest(main);
+		resvRequest.requestJSON(main.hotel_user_id, Integer.parseInt(la_room_number_input.getText()), la_start_input.getText(), la_end_input.getText(), stay);
 		
+	}
+	
+	//예약정보확인
+	public boolean check(){
+		if (la_start_input.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "날짜를 선택하지 않았습니다.");
+			return false;
+		}
+		if (la_room_number_input.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "방을 선택하지 않았습니다.");
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -257,7 +276,10 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		}else if (obj==bt_search) {
 			search();			
 		}else if (obj==bt_resv) {
-			resv();
+			if (check()) {			
+				resv();				
+				bt_resv.setEnabled(false);
+			}
 		}
 	}
 

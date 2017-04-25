@@ -15,7 +15,7 @@ import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
-
+import hotelclient.network.MemberResvReact;
 import hotelclient.network.RoomSearchReact;
 
 import hotelclient.network.ServiceReact;
@@ -70,7 +70,11 @@ public class ClientThread implements Runnable{
 			}else if (responseType.equalsIgnoreCase("room_search")) {
 				RoomSearchReact searchReact=new RoomSearchReact(main, json);				
 												
-			}else if (responseType.equalsIgnoreCase("resv")) {
+			}else if (responseType.equalsIgnoreCase("member_resv")) {
+				System.out.println(json.toString());
+				MemberResvReact resvReact=new MemberResvReact(main, json);
+				
+			}else if (responseType.equalsIgnoreCase("guest_resv")) {
 		
 				
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
