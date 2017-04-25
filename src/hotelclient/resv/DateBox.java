@@ -32,7 +32,6 @@ public class DateBox extends JPanel {
 		width=(myCalendar.getWidth()/7)-10;
 		height=(myCalendar.getHeight()/6)-20;
 		
-		System.out.println(width+", "+height);
 		setLayout(new BorderLayout());;
 		la=new JLabel();
 		
@@ -61,10 +60,11 @@ public class DateBox extends JPanel {
 			if (myCalendar.resvPanel.count<2) {
 				JOptionPane.showMessageDialog(this, yyyy+"년 "+(mm+1)+"월 "+dd+"일");
 				setBackground(Color.GRAY);
+				//한자리인 달이나 일 앞에 0이 없으면 인식하지 못한다. mydateUtil이용
 				if (myCalendar.resvPanel.count==0) {
-					myCalendar.resvPanel.la_start_input.setText(yyyy+"-"+(mm+1)+"-"+dd+"-14-00-00");
+					myCalendar.resvPanel.la_start_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-14-00-00");
 				}else {
-					myCalendar.resvPanel.la_end_input.setText(yyyy+"-"+(mm+1)+"-"+dd+"-12-00-00");
+					myCalendar.resvPanel.la_end_input.setText(yyyy+"-"+DateUtil.getDateString(Integer.toString(mm+1))+"-"+DateUtil.getDateString(Integer.toString(dd))+"-12-00-00");
 				}
 				
 				myCalendar.resvPanel.count++;

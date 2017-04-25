@@ -60,7 +60,7 @@ public class ClientMain extends JFrame implements ActionListener {
 	public CheckUserPanel checkAdminPanel; // 로그인패널
 	public RegAdminPanel regAdminPanel; // 관리자 등록패널
 	JPanel p_container;
-	JPanel[] page = new JPanel[3];
+	public JPanel[] page = new JPanel[3];
 
 	// p_container에 붙을 ui관련 객체들
 	public JPanel p_north, p_west, p_center;
@@ -98,7 +98,9 @@ public class ClientMain extends JFrame implements ActionListener {
 	// 기타 객체들
 	ClockThread clock; // 시계
 
-	public ClientMain() {		
+	public ClientMain() {
+		super("호텔 서비스 시스템");
+		
 		// db연동에 사용될 객체들
 		manager = DBManager.getInstance();
 		con=manager.getConnection();	

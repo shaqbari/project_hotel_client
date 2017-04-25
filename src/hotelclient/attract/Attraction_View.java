@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,12 +32,14 @@ public class Attraction_View extends JPanel{
 		
 		//버튼에 들어갈 이미지 사이즈 조절
 		Image orignImg = icon.getImage();
-		Image changeImg = orignImg.getScaledInstance(280, 220, Image.SCALE_SMOOTH);
+		Image changeImg = orignImg.getScaledInstance(280, 190, Image.SCALE_SMOOTH);
 		ImageIcon resizeIcon = new ImageIcon(changeImg);
 				
 		la.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		la.setBackground(Color.LIGHT_GRAY);
-		bt.setPreferredSize(new Dimension(280, 220));
+		la.setHorizontalAlignment(JLabel.CENTER);	//글씨 중앙으로 정렬
+		la.setVerticalAlignment(JLabel.CENTER);		//글씨 중앙으로 정렬
+		bt.setPreferredSize(new Dimension(280, 190));
 		bt.setIcon(resizeIcon);
 				
 		add(la);

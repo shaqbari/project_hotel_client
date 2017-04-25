@@ -14,8 +14,9 @@ import org.xml.sax.SAXException;
 public class XMLParser {
 	SAXParserFactory factory;
 	SAXParser parser;
-	URL url;
+	URL url, dbUrl;
 	public MyHandler handler;
+	public MyDbConfigHandler dbHandler;
 	
 	public XMLParser() {
 		factory=SAXParserFactory.newInstance();
@@ -25,6 +26,8 @@ public class XMLParser {
 				url=this.getClass().getResource("/Config.xml");
 				parser.parse(new File(url.toURI()), handler=new MyHandler());
 				
+				dbUrl=this.getClass().getResource("/dbConfig.xml");
+				parser.parse(new File(dbUrl.toURI()), dbHandler=new MyDbConfigHandler());
 				
 			} catch (ParserConfigurationException e) {
 				e.printStackTrace();

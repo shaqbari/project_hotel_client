@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
+import hotelclient.network.RoomSearchReqeust;
 
 public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	ClientMain main;
@@ -24,7 +25,10 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	public static final int WIDTH=1100;
 	public static final int  HEIGHT=900;
-	JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_east_resv;
+	
+	
+	
+	public JPanel p_center, p_center_north, p_east, p_east_option, p_east_room, p_east_resv;
 	
 	//p_center_north에 붙을 예정
 	JLabel desc;
@@ -44,6 +48,9 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	JLabel la_start, la_start_input, la_end, la_end_input, la_option, la_option_input,  la_room_number, la_room_number_input, la_price, la_price_input;
 	JLabel[] resvInfo =new JLabel[10];
 	JButton bt_resv;
+	
+	//p_east_room에 붙을 예정
+	JLabel la_room;
 	
 	Dimension size=new Dimension(WIDTH/6-10, 40);
 	Font font=new Font("맑은 고딕", Font.PLAIN, 15);
@@ -81,13 +88,15 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		
 		la_optionSelect.setPreferredSize(new Dimension(WIDTH/3-150, 40));
 		
-		la_resv=new JLabel("예약정보");
+		la_room=new JLabel("  3. 방 선택");
+		
+		la_resv=new JLabel("  4. 예약확인");
 		resvInfo[0]=la_start=new JLabel("입실예약일 : ");
 		resvInfo[1]=la_start_input=new JLabel();
 		resvInfo[2]=la_end=new JLabel("퇴실예약일 : ");
 		resvInfo[3]=la_end_input=new JLabel();
 		resvInfo[4]=la_option=new JLabel("방옵션 : ");
-		resvInfo[5]=la_option_input=new JLabel();
+		resvInfo[5]=la_option_input=new JLabel("deluxe");
 		resvInfo[6]=la_room_number=new JLabel("호실 : ");
 		resvInfo[7]=la_room_number_input=new JLabel();
 		resvInfo[8]=la_price=new JLabel("가격 : ");
@@ -102,6 +111,9 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		for (int i = 0; i < boxs.length; i++) {
 			p_east_option.add(boxs[i]);
 		}
+		
+		la_room.setPreferredSize(new Dimension(WIDTH/3, 40));
+		p_east_room.add(la_room);
 		
 		la_resv.setPreferredSize(new Dimension(WIDTH/3, 40));
 		p_east_resv.add(la_resv);		
@@ -143,8 +155,40 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		setVisible(false);	
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void refrash(){
+		//안보이게 하고 새로운 패널생성후 이패널을 지운다.
+		this.setVisible(false);
+		ResvPanel resvPanel=new ResvPanel(main);				
+		resvPanel.setVisible(true);
+		main.p_center.add(resvPanel);
+		main.resvPanel=resvPanel;//메인의 패널은 여기서 새로만든 패널이 된다.
+		main.p_center.remove(this);
+	}
+	
+	public void search(){
+		System.out.println("방검색 눌렀어?");
+		//옵션선택 버튼 다시 선택못하게 막자
+		for (int i = 0; i < boxs.length; i++) {
+			boxs[i].setEnabled(false);
+		}
+		//서버에 요청 보낸다.
+		RoomSearchReqeust searchReqeust=new RoomSearchReqeust(main);		
+		searchReqeust.requestJSON(la_start_input.getText(), la_end_input.getText(), la_option_input.getText());
+	}
+	
+	public void resv(){
 		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		Object obj=e.getSource();
+		if (obj==bt_refrash) {
+			refrash();			
+		}else if (obj==bt_search) {
+			search();			
+		}else if (obj==bt_resv) {
+			resv();
+		}
 	}
 
 	public void itemStateChanged(ItemEvent e) {

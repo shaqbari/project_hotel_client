@@ -20,7 +20,7 @@ public class ServiceReact {
 
 	public void react(){
 		content=json.get("content").toString();
-		main.chatPanel.area.append(content+"\n");		
+		main.chatPanel.area.append(content+"서비스가 주문되었습니다"+"\n");	
 		
 	}
 	
