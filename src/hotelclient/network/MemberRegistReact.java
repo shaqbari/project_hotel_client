@@ -27,18 +27,18 @@ public class MemberRegistReact {
 	String dd;
 	
 
-	/*	//비회원 방예약 응답
+/*	//회원가입 응답
 	var msgExMemberResv2{		
-		"responseType":"guest_resv",
-		"result":"yes",
-		"resv_id":"24"
-		s
+		"responseType":"membership_regist",
+		"result":"yes"	,
+		"membership_id":23
+		
 	}	
 	var msgExMemberResv2{		
-		"responseType":"guest_resv",
+		"responseType":"membership_regist",
 		"result":"no"
-	}
-*/	
+	}*/
+	
 	public MemberRegistReact(ClientMain main, JSONObject json) {
 		this.main=main;
 		this.resvPanel=main.resvPanel;
@@ -53,15 +53,13 @@ public class MemberRegistReact {
 		if (result.equalsIgnoreCase("yes")) {
 			System.out.println("예약완료");			
 		
-			JOptionPane.showMessageDialog(resvPanel, "예약에 성공했습니다.\n예약번호 : "+json.get("resv_id").toString()
-					+"\n예약일 :"+resvPanel.la_start_input.getText()+"~"+resvPanel.la_end_input.getText()
-					+"\n옵션 :"+resvPanel.la_option_input.getText()
-					+"\n방번호 :" +resvPanel.la_room_number_input.getText()
-					+"\n가격 :"+resvPanel.la_price_input.getText());
-			main.resvPanel.refrash();
+			JOptionPane.showMessageDialog(resvPanel, "회원가입에 성공했습니다.\n회원번호 : "+json.get("membership_id").toString());
+			main.setPage(0);
+			main.regMemberPanel.initialSet();
+			
 		}else if (result.equalsIgnoreCase("no")) {
-			JOptionPane.showMessageDialog(main, "예약에 실패했습니다. 다시 시도해주시기 바랍니다.");
-			main.resvPanel.refrash();
+			JOptionPane.showMessageDialog(main, "회원가입에 실패했습니다. 다시 시도해주시기 바랍니다.");
+			main.regMemberPanel.initialSet();
 		}		
 		
 	}
