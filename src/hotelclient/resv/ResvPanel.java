@@ -1,22 +1,28 @@
 package hotelclient.resv;
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Checkbox;
 import java.awt.CheckboxGroup;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -64,10 +70,10 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	/*-------------------------------------------------------------*/
 	//p_option_info에 붙을 예정인것을 선언한다.
-	JLabel la_option_bed, la_bed_input;
-	
-	
-	
+	//JLabel la_option_bed, la_bed_input;
+	JPanel p_option_detail, p_option_img;
+	JLabel la_option_detail;
+	Canvas can;
 	
 	/*-------------------------------------------------------------*/
 	
@@ -133,11 +139,9 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		
 		/*-------------------------------------------------------------*/
 		//p_option_info에 붙일것을 초기화한다.
-		la_option_bed=new JLabel("침대 :");
-		la_bed_input=new JLabel();
-		
-		
-		
+		p_option_detail = new JPanel();
+		la_option_detail = new JLabel();
+		p_option_img = new JPanel();
 		
 		/*-------------------------------------------------------------*/
 				
@@ -197,12 +201,18 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		}
 		/*-------------------------------------------------------------*/
 		//p_option_info에 붙인다.
+
+		p_option_info.setLayout(new BorderLayout());
+		p_option_detail.setLayout(new BorderLayout());
+		p_option_img.setLayout(new BorderLayout());
+
+		p_option_info.add(p_option_img);
+		p_option_detail.add(la_option_detail);
+		p_option_info.add(p_option_detail, BorderLayout.EAST);
+		p_option_detail.setPreferredSize(new Dimension(150, 300));
 		
-		p_option_info.add(la_option_bed);
-		p_option_info.add(la_bed_input);
-		
-		
-		
+		p_option_img.setBackground(Color.LIGHT_GRAY);
+		p_option_detail.setBackground(Color.LIGHT_GRAY);
 		
 		/*-------------------------------------------------------------*/
 		
@@ -430,8 +440,27 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 				
 				for (int j = 0; j < optionInfo.size(); j++) {
 					if (boxs[i].getLabel().equalsIgnoreCase(optionInfo.get(j).getRoom_option_name())) {
-						la_bed_input.setText(optionInfo.get(j).getRoom_option_bed());
-						
+						try {
+							String size = Integer.toString(optionInfo.get(j).getRoom_option_size());
+							String bed = optionInfo.get(j).getRoom_option_bed();
+							String view = optionInfo.get(j).getRoom_option_view();
+							String max = Integer.toString(optionInfo.get(j).getRoom_option_max());
+							URL url = new URL("http://pseudoluna.synology.me/experi/images/"+optionInfo.get(j).getRoom_option_img());			
+							Image img = ImageIO.read(url);
+							
+							//기존꺼 지우고 다시 그리기. 그리고 붙이는 순서가 애매해 item이벤트 발생 시 사진을 그리는 것으로 설정
+							p_option_img.removeAll();
+							can = new Canvas(){
+								public void paint(Graphics g) {
+									g.drawImage(img, 0, 0, 200, 200, this);
+								}
+							};
+							can.setPreferredSize(new Dimension(200, 200));
+							p_option_img.add(can);	
+							la_option_detail.setText("<html>ㆍ평형 : "+size+"평 <br> ㆍ침대 : "+bed+"<br> ㆍ객실 뷰 : "+view+"<br>ㆍ최대인원 : "+max+"명 </html>");		
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 						
 					}			
 				}				
