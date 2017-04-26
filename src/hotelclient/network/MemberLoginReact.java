@@ -100,6 +100,11 @@ public class MemberLoginReact {
 			
 			
 			reset();
+			
+			for (int i = 0; i < main.resvPanel.guestInfo.size(); i++) {
+				main.resvPanel.guestInfo.get(i).setVisible(false);//회원이 맞다면 예약시 비회원 추가란 안보이게 한다.				
+			}		
+			
 			main.setPage(2);
 			JOptionPane.showMessageDialog(main, member_name+"님 반갑습니다.");			
 		}else if (result.equalsIgnoreCase("no")) {
