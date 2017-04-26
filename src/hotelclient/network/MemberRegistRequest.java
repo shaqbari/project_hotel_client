@@ -7,7 +7,7 @@ import hotelclient.resv.DateUtil;
 import hotelclient.ClientMain;
 import hotelclient.ClientThread;
 
-public class GuestResvRequest{
+public class MemberRegistRequest{
 	ClientMain main;
 	ClientThread clientThread;
 	String yyyy;
@@ -18,7 +18,7 @@ public class GuestResvRequest{
 	String ss;
 	
 		
-	public GuestResvRequest(ClientMain main) {
+	public MemberRegistRequest(ClientMain main) {
 		this.main=main;
 		this.clientThread=main.clientThread;
 				

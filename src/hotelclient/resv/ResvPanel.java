@@ -73,7 +73,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	//p_east_resv에 붙을 예정
 	JLabel la_resv;
-	JLabel la_start, la_start_input, la_end, la_end_input, la_stay, la_stay_input, la_option, la_option_input,  la_room_number, la_room_number_input, la_price, la_price_input;
+	public JLabel la_start, la_start_input, la_end, la_end_input, la_stay, la_stay_input, la_option, la_option_input,  la_room_number, la_room_number_input, la_price, la_price_input;
 	//비회원일경우 추가로 보일것들	
 	JLabel[] resvInfo =new JLabel[12];
 	JButton bt_resv;
@@ -89,6 +89,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	Dimension size=new Dimension(WIDTH/6-10, 25);
 	Font font=new Font("맑은 고딕", Font.PLAIN, 15);
 	
+	
+	//생성자 시작
 	public ResvPanel(ClientMain main) {
 		this.main=main;
 		con=main.con;
@@ -232,7 +234,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 			/*if (!main.checkAdminPanel.isGuest) {
 				guestInfo.get(i).setVisible(false);
 			}*/
-			//회원로그인시 안보이게하자. 로그아웃에 대비해비회원로그인시 보이게해야한다.
+			//회원로그인시 안보이게하자. 로그아웃에 대비해비회원로그인시 보이게해야한다. reflash할때도 조심
 			
 		}		
 				
@@ -277,11 +279,20 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		//안보이게 하고 새로운 패널생성후 이패널을 지운다.
 		this.setVisible(false);
 		ResvPanel resvPanel=new ResvPanel(main);				
-		resvPanel.setVisible(true);
+		resvPanel.setVisible(true);		
 		main.p_center.add(resvPanel);
+		
+		//회원이라면 비회원 추가사항 안보이게 한다. 
+		for (int i = 0; i < resvPanel.guestInfo.size(); i++) {
+			if (!main.checkAdminPanel.isGuest) {
+				resvPanel.guestInfo.get(i).setVisible(false);
+			} 
+		}
 		main.resvPanel=resvPanel;//메인의 패널은 여기서 새로만든 패널이 된다.
 		main.p_center.remove(this);
 	}
+	
+	//쓰레드로 실시간 컬러링 도전해보자.
 	
 	public void search(){
 		System.out.println("방검색 눌렀어?");
@@ -385,6 +396,12 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	
 	//비회원 추가 예약정보 확인
 	public boolean plusCheck(){
+		if (txt_name.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "이름을 입력하지 않았습니다.");
+		}
+		if (txt_phone1.getText().length()==0||txt_phone2.getText().length()==0||txt_phone3.getText().length()==0) {
+			JOptionPane.showMessageDialog(this, "휴대전화 번호를 입력하지 않았습니다.");			
+		}
 		
 		return true;
 	}

@@ -13,7 +13,7 @@ import hotelclient.resv.ResvPanel;
 import hotelclient.resv.RoomButton;
 
 
-public class MemberResvReact {
+public class GuestResvReact {
 	ClientMain main;
 	ResvPanel resvPanel;
 	
@@ -27,19 +27,19 @@ public class MemberResvReact {
 	String dd;
 	
 
-	/*	//회원 방예약 응답
+	/*	//비회원 방예약 응답
 	var msgExMemberResv2{		
-		"responseType":"member_resv",
+		"responseType":"guest_resv",
 		"result":"yes",
 		"resv_id":"24"
 		s
 	}	
 	var msgExMemberResv2{		
-		"responseType":"member_resv",
+		"responseType":"guest_resv",
 		"result":"no"
 	}
 */	
-	public MemberResvReact(ClientMain main, JSONObject json) {
+	public GuestResvReact(ClientMain main, JSONObject json) {
 		this.main=main;
 		this.resvPanel=main.resvPanel;
 		this.json=json;
