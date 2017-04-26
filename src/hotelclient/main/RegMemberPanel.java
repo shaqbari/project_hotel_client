@@ -1,14 +1,13 @@
 package hotelclient.main;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -18,67 +17,75 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import hotelclient.ClientMain;
+import hotelclient.network.MemberRegistReact;
+import hotelclient.network.MemberRegistRequest;
 
-public class RegAdminPanel extends JPanel implements ActionListener {
+public class RegMemberPanel extends JPanel implements ActionListener {
 	ClientMain main;
 	
 	JPanel p_north, p_input, p_south;
-	JLabel la_title, la_serial, la_id, la_pw, la_name;
+	JLabel la_title;
+	JLabel la_id, la_pw, la_name, la_email, la_phone;
+	JTextField txt_id, txt_name, txt_email, txt_phone;
+	ArrayList<Component> registInfo=new ArrayList<Component>();
+	
 	Font font;
-	JTextField txt_serial, txt_id, txt_name;
 	JPasswordField txt_pw;
 	JButton bt_regist, bt_prev;
 
-	String serial="1111-2222-3333-4444";
 	
-	public RegAdminPanel(ClientMain main) {
+	public RegMemberPanel(ClientMain main) {
 		this.main = main;
 					
 		p_north = new JPanel();
 		p_input = new JPanel();
 		p_south = new JPanel();
 
-		la_title = new JLabel("관리자 등록");
-		la_serial = new JLabel("SN");
+		la_title = new JLabel("회원 등록");
 		la_id = new JLabel("ID");
 		la_pw = new JLabel("PW");
 		la_name = new JLabel("이름");
-
-		font = new Font("맑은 고딕", font.PLAIN, 18);
-
-		txt_serial=new JTextField("1111-2222-3333-4444", 10);
-		txt_id = new JTextField(10);
-		txt_name = new JTextField(10);
-		txt_pw = new JPasswordField(10);
+		la_email = new JLabel("e-mail");
+		la_phone=new JLabel("전화번호");
+		txt_id = new JTextField(15);
+		txt_name = new JTextField(15);
+		txt_pw = new JPasswordField(15);
+		txt_email=new JTextField(15);
+		txt_phone=new JTextField(15);
 		
-		txt_serial.setFont(font);
+		font = new Font("맑은 고딕", font.PLAIN, 18);
 		txt_id.setFont(font);
 		txt_name.setFont(font);
 		txt_pw.setFont(font);
+		txt_email.setFont(font);
+		txt_phone.setFont(font);
 
 		bt_regist = new JButton("등록");
 		bt_prev = new JButton("이전");
 
 		setLayout(new BorderLayout());
-		p_input.setLayout(new GridLayout(4, 2));
+		p_input.setLayout(new GridLayout(5, 2));
 		p_input.setPreferredSize(new Dimension(400, 200));
 		
-		la_serial.setFont(font);
 		la_title.setFont(new Font("맑은고딕", font.BOLD, 25));
 		la_id.setFont(font);
 		la_pw.setFont(font);
 		la_name.setFont(font);
+		la_email.setFont(font);
+		la_phone.setFont(font);
 
 		p_north.add(la_title);
 
-		p_input.add(la_serial);
-		p_input.add(txt_serial);
 		p_input.add(la_id);
 		p_input.add(txt_id);
 		p_input.add(la_pw);
 		p_input.add(txt_pw);
 		p_input.add(la_name);
 		p_input.add(txt_name);
+		p_input.add(la_email);
+		p_input.add(txt_email);
+		p_input.add(la_phone);
+		p_input.add(txt_phone);
 
 		p_south.add(bt_regist);
 		p_south.add(bt_prev);
@@ -90,25 +97,21 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 		bt_regist.addActionListener(this);
 		bt_prev.addActionListener(this);
 
-		setPreferredSize(new Dimension(400, 300));
+		setPreferredSize(new Dimension(400, 350));
 		setVisible(false);
 	}
 	
 	//입력이 올바르지 않을경우 입력칸 초기화
 	public void initialSet(){
-		txt_serial.setText("");
 		txt_id.setText("");
 		txt_pw.setText("");
 		txt_name.setText("");
-		txt_serial.requestFocus();
+		txt_email.setText("");
+		txt_phone.setText("");
+		txt_id.requestFocus();
 	}
 	
 	public boolean check() {		
-		if (txt_serial.getText().equals(serial)==false) {//이렇게 쓰면 else문을 안써도 된다.
-			JOptionPane.showMessageDialog(this, "serial number가 올바르지 않습니다.");
-			initialSet();
-			return false;
-		}		
 		if (txt_id.getText().equals("")) {
 			JOptionPane.showMessageDialog(this, "id를 입력해주세요");
 			initialSet();
@@ -119,7 +122,7 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 			initialSet();
 			return false;
 		}
-		if (new String(txt_pw.getPassword()).equals("")) {
+		if (new String(txt_pw.getPassword()).length()==0) {
 			JOptionPane.showMessageDialog(this, "password를 입력해주세요");
 			initialSet();
 			return false;
@@ -129,8 +132,18 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 			initialSet();
 			return false;
 		}
-		if(txt_name.getText().equals("")){
+		if(txt_name.getText().length()==0){
 			JOptionPane.showMessageDialog(this, "이름를 입력해주세요");
+			initialSet();							
+			return false;		
+		}		
+		if(txt_email.getText().length()==0){
+			JOptionPane.showMessageDialog(this, "이메일를 입력해주세요");
+			initialSet();							
+			return false;		
+		}		
+		if(txt_phone.getText().length()==0){
+			JOptionPane.showMessageDialog(this, "전화번호를 입력해주세요");
 			initialSet();							
 			return false;		
 		}		
@@ -138,6 +151,11 @@ public class RegAdminPanel extends JPanel implements ActionListener {
 	}
 
 	public void regist() {
+		if (check()) {
+			MemberRegistRequest registRequest=new MemberRegistRequest(main);
+			registRequest.requestJSON(txt_id.getText(), new String(txt_pw.getPassword()), txt_name.getText(), txt_phone.getText(), txt_email.getText());
+		}
+		
 		/*if (check()) {
 			StringBuffer sql=new StringBuffer();
 			sql.append("insert into hotel_admin(hotel_admin_id, hotel_admin_pw, hotel_admin_name)");

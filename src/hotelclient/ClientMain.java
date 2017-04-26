@@ -34,7 +34,7 @@ import hotelclient.main.CheckUserPanel;
 import hotelclient.main.ClockThread;
 import hotelclient.main.DBManager;
 import hotelclient.main.MyButton;
-import hotelclient.main.RegAdminPanel;
+import hotelclient.main.RegMemberPanel;
 import hotelclient.main.XMLParser;
 import hotelclient.resv.ResvPanel;
 import hotelclient.service.ServicePanel;
@@ -58,7 +58,7 @@ public class ClientMain extends JFrame implements ActionListener {
 
 	// 윈도우전환에 사용될 객체들
 	public CheckUserPanel checkAdminPanel; // 로그인패널
-	public RegAdminPanel regAdminPanel; // 관리자 등록패널
+	public RegMemberPanel regMemberPanel; // 관리자 등록패널
 	JPanel p_container;
 	public JPanel[] page = new JPanel[3];
 
@@ -111,7 +111,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		port=Integer.parseInt(parser.handler.getMyPort());
 		
 		page[0]=checkAdminPanel=new CheckUserPanel(this);//로그인정보 확인 패널
-		page[1]=regAdminPanel=new RegAdminPanel(this);//로그인정보 확인 패널
+		page[1]=regMemberPanel=new RegMemberPanel(this);//로그인정보 확인 패널
 		page[2]=p_container = new JPanel();//아래패널을 담을 패널
 		p_north = new JPanel();
 		p_west = new JPanel();
@@ -200,7 +200,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		p_container.add(p_center);
 		
 		add(checkAdminPanel);
-		add(regAdminPanel);
+		add(regMemberPanel);
 		add(p_container);
 		setPage(0);//처음실행했을때는 로그인패널보이게 한다.
 		
@@ -215,6 +215,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
+				clientThread.close();
 			}
 		});
 

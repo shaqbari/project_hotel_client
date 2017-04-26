@@ -24,7 +24,8 @@ public class MemberResvRequest{
 				
 		Calendar cal=Calendar.getInstance();
 		yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		mm=DateUtil.getDateString(Integer.toString(cal.get(Calendar.MONTH)));
+		//mm은 0부터 시작하므로 출력할때 +1을 해줘야 한다.
+		mm=DateUtil.getDateString(Integer.toString(cal.get(Calendar.MONTH)+1));
 		dd=DateUtil.getDateString(Integer.toString(cal.get(Calendar.DATE)));
 		hh24=DateUtil.getDateString(Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
 		mi=DateUtil.getDateString(Integer.toString(cal.get(Calendar.MINUTE)));

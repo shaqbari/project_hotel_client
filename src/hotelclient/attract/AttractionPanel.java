@@ -48,7 +48,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 	// 지도 기본 위도, 경도, 생성이미지 명
 	String latitude = "33.249476";
 	String longitude = "126.408080";
-	//String img = "map_main.jpg";
 	String img ="map.jpg";
 	
 	//지도 줌인 줌아웃을 위한 변수
@@ -172,21 +171,21 @@ public class AttractionPanel extends JPanel implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		Object obj = e.getSource();
-		if (obj == bt_samsung) { // 삼성혈
+		if (obj == bt_samsung) {
 			samsung();
-		} else if (obj == bt_dragon) { // 용두암
+		} else if (obj == bt_dragon) { 
 			dragon();
-		} else if (obj == bt_mabang) { // 마방목지
+		} else if (obj == bt_mabang) { 
 			mabang();
-		} else if (obj == bt_hanla) { // 한라수목원
+		} else if (obj == bt_hanla) {
 			hanla();
-		} else if (obj == bt_subji) { // 섭지코지
+		} else if (obj == bt_subji) {
 			subji();
-		} else if (obj == bt_sungsan) { // 성산일출봉
+		} else if (obj == bt_sungsan) { 
 			sungsan();
-		} else if (obj == bt_chunji) { // 성산일출봉
+		} else if (obj == bt_chunji) { 
 			chunji();
-		} else if (obj == bt_manjang) { // 성산일출봉
+		} else if (obj == bt_manjang) { 
 			manjang();
 		} else if (obj == bt_zoomIn) { 
 			zoomNum++;
@@ -209,8 +208,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 			e.printStackTrace();
 		}
 	}
-	
-	//img = "map_" + imgName[0][1] + ".jpg";
 	
 	//삼성혈 정보
 	public void samsung(){

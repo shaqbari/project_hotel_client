@@ -34,7 +34,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 	ClientMain main;
 	
 	JPanel p_north, p_input, p_input_guest, p_input_member, p_south;
-	boolean isGuest=false;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
+	public boolean isGuest=false;//비회원과 회원패널 구분하는데 쓰일 예정 true이면 guest, false이면 member
 	Font font;
 		
 	JLabel la_title;
@@ -208,6 +208,7 @@ public class CheckUserPanel extends JPanel implements ActionListener, ItemListen
 			p_input_guest.setVisible(true);;
 			p_input_member.setVisible(false);
 			isGuest=true;
+			System.out.println(isGuest);
 		}else if (obj==ch_member) {
 			p_input_guest.setVisible(false);;
 			p_input_member.setVisible(true);

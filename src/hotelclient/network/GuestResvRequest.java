@@ -7,7 +7,7 @@ import hotelclient.resv.DateUtil;
 import hotelclient.ClientMain;
 import hotelclient.ClientThread;
 
-public class MemberRegistRequest{
+public class GuestResvRequest{
 	ClientMain main;
 	ClientThread clientThread;
 	String yyyy;
@@ -18,7 +18,7 @@ public class MemberRegistRequest{
 	String ss;
 	
 		
-	public MemberRegistRequest(ClientMain main) {
+	public GuestResvRequest(ClientMain main) {
 		this.main=main;
 		this.clientThread=main.clientThread;
 				
@@ -35,33 +35,28 @@ public class MemberRegistRequest{
 	}
 	
 	/*//비회원 방예약의 경우		
-	//클라이언트 회원가입 요청
-	var msgExResgist={
-		"room_number":204,
-		"requestType":"membership_regist",
+	var msgExResv={
+		"room_number":303,
+		"reqeustType":"guest_resv",
 		"requestTime":"2017-04-17-18-19-23",
-		"member_nick":"jsklsk",
-		"member_pw":"1234",
-		"member_name":"김성현",
-		"member_phone":"010-2322-1111"",
-		"member_email":"syssk@aewr.com",
-		"member_gender":"남",
-		"member_birthday":"1987-05-03"
+		"guest_name":"남남남",
+		"guest_phone":"010-2222-3333"	
+		"resv_room_number": 602,
+		"resv_time":"2017-04-20-14-00-00",
+		"end_time":"2017-04-23-12-00-00",
+		"stay":3
 	}*/
-	
-	
-	public void requestJSON(String member_nick, String member_pw, String member_name, String member_phone, String member_email) {						
+	public void requestJSON(int hotel_user_id, int resv_room_number, String start, String end, int stay) {						
 		JSONObject json=new JSONObject();
 		json.put("room_number", main.room_Number);
-		json.put("requestType", "membership_regist");
+		json.put("requestType", "guest_resv");
 		json.put("requestTime", yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
-		json.put("member_nick", member_nick);		
-		json.put("member_pw", member_pw);		
-		json.put("member_name", member_name);		
-		json.put("member_phone", member_phone);		
-		json.put("member_email", member_email);		
-		json.put("member_gender", "남");
-		json.put("member_birthday", "1987-05-03");
+		json.put("guest_name", main.resvPanel.txt_name.getText());		
+		json.put("guest_phone", main.resvPanel.txt_phone1.getText()+"-"+main.resvPanel.txt_phone2.getText()+"-"+main.resvPanel.txt_phone3.getText());		
+		json.put("resv_room_number", resv_room_number);		
+		json.put("resv_time", start);		
+		json.put("end_time", end);
+		json.put("stay", stay);
 		
 		String JSONRequest=json.toJSONString();
 		System.out.println(JSONRequest);

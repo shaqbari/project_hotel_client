@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 
 import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
+import hotelclient.network.GuestResvReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
 import hotelclient.network.MemberResvReact;
@@ -39,11 +40,25 @@ public class ClientThread implements Runnable{
 			buffw=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}	
 				
 		thread=new Thread(this);
 		thread.start();
 		System.out.println("클라이언트 가동");
+	}
+	
+	public void close(){
+		try {
+			if(buffr!=null){
+				buffr.close();
+			}
+			if(buffw!=null){
+				buffw.close();
+			}	
+				flag=false;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void listen(){
@@ -75,7 +90,7 @@ public class ClientThread implements Runnable{
 				MemberResvReact resvReact=new MemberResvReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("guest_resv")) {
-		
+				GuestResvReact guestResvReact=new GuestResvReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
 				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);
@@ -100,7 +115,7 @@ public class ClientThread implements Runnable{
 			buffw.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 
