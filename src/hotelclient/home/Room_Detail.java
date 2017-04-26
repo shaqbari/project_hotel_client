@@ -99,8 +99,23 @@ public class Room_Detail extends JFrame{
 			}	
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}  finally {
+				if (rs!=null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt!=null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			
+		
 		try {	
 			URL url=new URL("http://pseudoluna.synology.me/experi/images/"+room_img);
 			System.out.println(url);
@@ -108,7 +123,7 @@ public class Room_Detail extends JFrame{
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 }

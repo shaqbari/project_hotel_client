@@ -64,6 +64,9 @@ public class Serv_resvOrder extends JFrame implements ActionListener{
 		la_price.setFont(new Font("맑은고딕",Font.BOLD,30));
 		p_info.add(la_price);
 		
+		//여기서부터 예약날짜 시간 택할 수 있게 checkbox 넣자
+		
+		
 		//p_order
 		bt_confirm = new JButton("확인/예약");
 		//bt_resvOrder = new JButton("예약주문");

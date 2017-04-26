@@ -18,6 +18,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.json.simple.JSONObject;
+
 import hotelclient.ClientMain;
 
 public class Serv_Detail extends JFrame implements ActionListener{
@@ -107,6 +109,21 @@ public class Serv_Detail extends JFrame implements ActionListener{
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}  finally {
+				if (rs!=null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if (pstmt!=null) {
+					try {
+						pstmt.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	
@@ -125,18 +142,19 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		String msg=serv_name;
 		System.out.println(msg);
 		
-		StringBuffer json = new StringBuffer();
-		json.append("{");
-		json.append("\"requestType\":\"service\",");
-		json.append("\"room_number\":"+main.room_Number+",");
-		json.append("\"requestTime\":\""+yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss+"\",");
-		json.append("\"hotel_user_id\":"+main.hotel_user_id+"");			
-		json.append("\"content\":\""+msg+"\"");			
-		json.append("}");	
+		JSONObject json = new JSONObject();
+		json.put("requestType","service");
+		json.put("room_number",main.room_Number);
+		json.put("service_id",service_id);
+		json.put("requestTime",yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
+		json.put("hotel_user_id",main.hotel_user_id);			
+		json.put("content",msg);
 		
-		//System.out.println(json.toString());
+		String JSONRequest=json.toJSONString();
 		
-		main.clientThread.send(json.toString());
+		System.out.println(JSONRequest);
+		
+		main.clientThread.send(JSONRequest);
 	}
 	
 	//예약주문 , 서비스 선택 후 예약일시 정하면 예약주문 가능
