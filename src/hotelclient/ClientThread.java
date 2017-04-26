@@ -39,11 +39,25 @@ public class ClientThread implements Runnable{
 			buffw=new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}	
 				
 		thread=new Thread(this);
 		thread.start();
 		System.out.println("클라이언트 가동");
+	}
+	
+	public void close(){
+		try {
+			if(buffr!=null){
+				buffr.close();
+			}
+			if(buffw!=null){
+				buffw.close();
+			}	
+				flag=false;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void listen(){
@@ -100,7 +114,7 @@ public class ClientThread implements Runnable{
 			buffw.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		} 
 		
 	}
 
