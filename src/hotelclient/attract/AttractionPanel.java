@@ -48,7 +48,8 @@ public class AttractionPanel extends JPanel implements ActionListener {
 	// 지도 기본 위도, 경도, 생성이미지 명
 	String latitude = "33.249476";
 	String longitude = "126.408080";
-	String img = "map_main.jpg";
+	//String img = "map_main.jpg";
+	String img ="map.jpg";
 	
 	//지도 줌인 줌아웃을 위한 변수
 	int zoomNum=17;
@@ -209,6 +210,8 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		}
 	}
 	
+	//img = "map_" + imgName[0][1] + ".jpg";
+	
 	//삼성혈 정보
 	public void samsung(){
 		String add = "제주특별자치도 제주시 이도1동 삼성로 22";
@@ -219,7 +222,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		//지도 설정
 		latitude = "33.504496";
 		longitude = "126.529190";
-		img = "map_" + imgName[0][1] + ".jpg";
 		//링크주소
 		str = "https://www.google.co.kr/maps/place/%EC%82%BC%EC%84%B1%ED%98%88/@33.5042631,126.5270046,17z/data=!4m5!3m4!1s0x350cfcac72f1bd87:0xfed7c87e51d6a0d4!8m2!3d33.5042631!4d126.5291986";
 		//정보 뿌리기
@@ -236,7 +238,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.516255";
 		longitude = "126.511890";
-		img = "map_" + imgName[1][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EC%9A%A9%EB%91%90%EC%95%94%E9%BE%99%E5%A4%B4%E5%B2%A9/@33.5161459,126.5096874,17z/data=!3m1!4b1!4m5!3m4!1s0x350ce4b2810e4315:0x3044bfd3cfaa7bb0!8m2!3d33.5161459!4d126.5118814";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[1][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -251,7 +252,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.427246";
 		longitude = "126.604116";
-		img = "map_" + imgName[2][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EB%A7%88%EB%B0%A9%EB%AA%A9%EC%A7%80/@33.4269778,126.6018786,17z/data=!3m1!4b1!4m5!3m4!1s0x350cfd8b880d1fe9:0x6a34ccfe385cc2d9!8m2!3d33.4269778!4d126.6040726";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[2][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -266,7 +266,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.470223";
 		longitude = "126.493191";
-		img = "map_" + imgName[3][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%ED%95%9C%EB%9D%BC%EC%88%98%EB%AA%A9%EC%9B%90/@33.4699272,126.4910505,17z/data=!3m1!4b1!4m5!3m4!1s0x350cfbbaf3e89deb:0xeef273c1810424e1!8m2!3d33.4699272!4d126.4932445";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[3][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -281,7 +280,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.423792";
 		longitude = "126.929312";
-		img = "map_" + imgName[3][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EC%84%AD%EC%A7%80%EC%BD%94%EC%A7%80/@33.4235416,126.9271379,17z/data=!4m12!1m6!3m5!1s0x350d131682df90fb:0x3e20058eb88a16f1!2z7ISt7KeA7L2U7KeA!8m2!3d33.4235416!4d126.9293266!3m4!1s0x350d131682df90fb:0x3e20058eb88a16f1!8m2!3d33.4235416!4d126.9293266";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[4][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -296,7 +294,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.470223";
 		longitude = "126.493191";
-		img = "map_" + imgName[3][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EC%84%B1%EC%82%B0+%EC%9D%BC%EC%B6%9C%EB%B4%89/@33.458056,126.940306,17z/data=!3m1!4b1!4m5!3m4!1s0x350d14b9f6e3789f:0x555132053a23b64b!8m2!3d33.458056!4d126.9425";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[5][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -311,7 +308,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.247204";
 		longitude = "126.554417";
-		img = "map_" + imgName[3][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EC%B2%9C%EC%A7%80%EC%97%B0%ED%8F%AD%ED%8F%AC/@33.246944,126.552223,17z/data=!4m5!3m4!1s0x350c5397e5d18685:0xdb873e6da9b01b6!8m2!3d33.246944!4d126.554417";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[6][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
@@ -326,7 +322,6 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.removeAll();
 		latitude = "33.528772";
 		longitude = "126.771470";
-		img = "map_" + imgName[3][1] + ".jpg";
 		str = "https://www.google.co.kr/maps/place/%EB%A7%8C%EC%9E%A5%EA%B5%B4/@33.528486,126.769287,17z/data=!3m1!4b1!4m5!3m4!1s0x350d19c496216a99:0xbb66abf00c2b95a6!8m2!3d33.528486!4d126.771481";
 		createMap();
 		la_mapInfo.setText("<html><br> ㆍ 명소명 : "+imgName[7][1]+"<br> ㆍ 주소 : "+add+"<br> ㆍ 전화번호 : "+call+"<br> ㆍ 영업시간 : "+time+"<br> ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
