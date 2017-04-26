@@ -13,6 +13,7 @@ import org.json.simple.parser.ParseException;
 
 import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
+import hotelclient.network.GuestResvReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
 import hotelclient.network.MemberResvReact;
@@ -89,7 +90,7 @@ public class ClientThread implements Runnable{
 				MemberResvReact resvReact=new MemberResvReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("guest_resv")) {
-		
+				GuestResvReact guestResvReact=new GuestResvReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
 				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);

@@ -53,7 +53,11 @@ public class MemberResvReact {
 		if (result.equalsIgnoreCase("yes")) {
 			System.out.println("예약완료");			
 		
-			JOptionPane.showMessageDialog(main, "예약에 성공했습니다.\n예약번호 : "+json.get("resv_id").toString());
+			JOptionPane.showMessageDialog(resvPanel, "예약에 성공했습니다.\n예약번호 : "+json.get("resv_id").toString()
+					+"\n예약일 :"+resvPanel.la_start_input.getText()+"~"+resvPanel.la_end_input.getText()
+					+"\n옵션 :"+resvPanel.la_option_input.getText()
+					+"\n방번호 :" +resvPanel.la_room_number_input.getText()
+					+"\n가격 :"+resvPanel.la_price_input.getText());
 			main.resvPanel.refrash();
 		}else if (result.equalsIgnoreCase("no")) {
 			JOptionPane.showMessageDialog(main, "예약에 실패했습니다. 다시 시도해주시기 바랍니다.");

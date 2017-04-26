@@ -88,6 +88,9 @@ public class GuestLoginReact {
 			//stay가아니라 종료날짜를 따로 db에 입력하자.
 			homePanel.getStay_input().setText(yyyy+"-"+mm+"-"+Integer.toString((Integer.parseInt(dd)+stay)));
 			
+			for (int i = 0; i < main.resvPanel.guestInfo.size(); i++) {
+				main.resvPanel.guestInfo.get(i).setVisible(true);//비회원이라면 예약시 비회원 추가란 보이게한다.				
+			}	
 			
 			reset();
 			main.setPage(2);

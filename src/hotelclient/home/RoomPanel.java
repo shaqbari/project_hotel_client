@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -28,12 +29,13 @@ public class RoomPanel extends JPanel{
 //	JButton bt_detail;
 	BufferedImage image;
 	URL url;
-	int width=120; int height=150;
+	int width=150; int height=190;
 	//String[] room_type={"deluxe","business","grand","first","vip","vvip", "sweet"};
 	ArrayList<Room_Option> list;
 	String room_type;	
 	ClientMain main;
 	Connection con;
+	Font font=new Font("¸¼Àº °íµñ", Font.BOLD,16);
 	
 	public RoomPanel(URL url, HomePanel home,String room_type) {
 		this.url=url;
@@ -41,6 +43,7 @@ public class RoomPanel extends JPanel{
 		this.room_type=room_type;
 		main=home.main;
 		con=main.con;
+		la=new JLabel(room_type);
 		
 		try {
 			image=ImageIO.read(url);
@@ -54,29 +57,26 @@ public class RoomPanel extends JPanel{
 			}
 		};
 		
+		la.setFont(font);
+		la.setForeground(Color.BLACK);
 
 		/*for(int i=0; i<room_type.length; i++){
 			la=new JLabel(room_type[i]);
 			
 		}*/
 		
-		la=new JLabel(room_type);
-
 		//bt_detail=new JButton("+");
-		
-		setLayout(new BorderLayout());
-		
-		add(la, BorderLayout.NORTH);
+		add(la);
 		add(can);
+		
 		//add(bt_detail, BorderLayout.SOUTH);
 	
 		
-		setBackground(Color.WHITE);
-		setPreferredSize(new Dimension(width, height+45));
+		//setBackground(Color.WHITE);
+		can.setPreferredSize(new Dimension(width, height));
+		setPreferredSize(new Dimension(width, height+30));
 		
-		
-		
-		la.addMouseListener(new MouseAdapter() {
+		can.addMouseListener(new MouseAdapter() {
 			public void mouseReleased(MouseEvent e) {
 				
 					new Room_Detail(con,room_type);
