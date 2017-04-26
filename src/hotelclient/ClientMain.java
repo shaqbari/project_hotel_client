@@ -215,6 +215,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		this.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
+				clientThread.close();
 			}
 		});
 
