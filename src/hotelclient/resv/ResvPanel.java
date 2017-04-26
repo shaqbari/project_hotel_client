@@ -263,7 +263,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		}
 		if (la_room_number_input.getText().length()==0) {
 			JOptionPane.showMessageDialog(this, "방을 선택하지 않았습니다.");
-			return false;
+			return false;//값이 없으면 false를 반환하자
 		}
 		
 		return true;
