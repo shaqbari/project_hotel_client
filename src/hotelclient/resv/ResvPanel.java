@@ -75,6 +75,11 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	JLabel la_option_detail;
 	Canvas can;
 	
+	//p_option_select에 붙여질 위아래 패널
+	JPanel p_option_select_north, p_option_select_south;
+	//p_option_select 아래 공간 유지 위한 패널
+	JPanel p_blank;
+	
 	/*-------------------------------------------------------------*/
 	
 	//p_east_resv에 붙을 예정
@@ -126,6 +131,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_east_room.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*1/7-10));	
 		p_east_resv.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*4/7-10));
 		
+		
+		
 		la_optionSelect=new JLabel("2. 옵션 선택");
 		bt_search=new JButton("3. 잔여 객실 검색");
 		group=new CheckboxGroup();
@@ -140,10 +147,16 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		la_optionSelect.setPreferredSize(new Dimension(WIDTH/3-150, 40));
 		
 		/*-------------------------------------------------------------*/
+		p_option_select_north = new JPanel();
+		p_option_select_south = new JPanel();
+		p_blank = new JPanel();
 		//p_option_info에 붙일것을 초기화한다.
 		p_option_detail = new JPanel();
 		la_option_detail = new JLabel();
 		p_option_img = new JPanel();
+		
+		//p_option_select_north.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*1/7-7));
+		//p_option_select_south.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*1/7-5));
 		
 		/*-------------------------------------------------------------*/
 				
@@ -197,10 +210,29 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 				
 		p_option_select.add(la_optionSelect);
 		p_option_select.add(bt_search);
+		/*
 		for (int i = 0; i < boxs.length; i++) {
 			p_option_select.add(boxs[i]);
 			boxs[i].setFont(font);
 		}
+		*/
+		/*--------------------------------------------------------------------*/
+		//select 버튼 나눠 붙이기
+		for (int i = 0; i < boxs.length-3; i++) {
+			p_option_select_north.add(boxs[i]);
+			boxs[i].setFont(font);
+		}
+		for (int i = boxs.length-3; i < boxs.length; i++) {
+			p_option_select_south.add(boxs[i]);
+			boxs[i].setFont(font);
+		}
+		p_option_select.add(p_option_select_north);
+		p_option_select.add(p_option_select_south);
+		p_option_select_north.setBackground(Color.LIGHT_GRAY);
+		p_option_select_south.setBackground(Color.LIGHT_GRAY);
+		p_blank.setBackground(Color.LIGHT_GRAY);
+		/*--------------------------------------------------------------------*/
+		
 		/*-------------------------------------------------------------*/
 		//p_option_info에 붙인다.
 
@@ -227,7 +259,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		
 		p_east_option.setLayout(new BorderLayout());		
 		p_east_option.add(p_option_select, BorderLayout.NORTH);
-		p_east_option.add(p_option_info);
+		p_east_option.add(p_blank);
+		p_east_option.add(p_option_info,BorderLayout.SOUTH);
 		
 		
 		la_resv.setPreferredSize(new Dimension(WIDTH/3, 40));
