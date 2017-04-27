@@ -92,6 +92,7 @@ public class MemberLoginReact {
 						
 			
 			main.la_user.setText(member_name);	
+			main.hotel_user_id=hotel_user_id;
 			
 			if (json.get(resv_id)!=null) {
 				dateProcess(resv_time);
