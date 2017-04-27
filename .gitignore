@@ -1,6 +1,6 @@
 # Created by https://www.gitignore.io/api/java,eclipse
 
-
+config/config.xml
 config/dbConfig.xml
 ### Eclipse ###
 dbConfig.xml

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+	<room>
+		<room_number>306</room_number><!--방이름 초기화-->
+	</room>
+	<server>
+		<ip>localhost</ip><!--서버관리프로그램의 ip주소 입력-->
+		<port>7777</port><!--서버관리프로그램의 port번호 입력-->
+	</server>
+</configs>

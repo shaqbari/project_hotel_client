@@ -59,9 +59,11 @@ public class MemberLoginReact {
 		if (result.equalsIgnoreCase("yes")) {
 			hotel_user_id=Integer.parseInt(json.get("hotel_user_id").toString());
 			member_name=json.get("member_name").toString();
-			resv_id=json.get("resv_id").toString();
-			resv_time=json.get("resv_time").toString();
-			stay=Integer.parseInt(json.get("stay").toString());			
+			if (json.get(resv_id)!=null) {
+				resv_id = json.get("resv_id").toString();
+				resv_time = json.get("resv_time").toString();
+				stay = Integer.parseInt(json.get("stay").toString());
+			}			
 		}
 		
 		react();
@@ -88,16 +90,19 @@ public class MemberLoginReact {
 		if (result.equalsIgnoreCase("yes")) {
 			System.out.println("로그인에 성공하였습니다.");			
 						
-			dateProcess(resv_time);
 			
 			main.la_user.setText(member_name);	
-			homePanel.getResv_id_input().setText(resv_id);
-			homePanel.getGuest_name_input().setText(member_name);
-			homePanel.getResv_time_input().setText(resv_time);
+			main.hotel_user_id=hotel_user_id;
 			
-			//stay가아니라 종료날짜를 따로 db에 입력하자.
-			homePanel.getStay_input().setText(yyyy+"-"+mm+"-"+Integer.toString((Integer.parseInt(dd)+stay)));
-			
+			if (json.get(resv_id)!=null) {
+				dateProcess(resv_time);
+				homePanel.getResv_id_input().setText(resv_id);
+				homePanel.getGuest_name_input().setText(member_name);
+				homePanel.getResv_time_input().setText(resv_time);
+				//stay가아니라 종료날짜를 따로 db에 입력하자.
+				homePanel.getStay_input()
+						.setText(yyyy + "-" + mm + "-" + Integer.toString((Integer.parseInt(dd) + stay)));
+			}
 			
 			reset();
 			
