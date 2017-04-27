@@ -52,6 +52,7 @@ public class MemberLoginRequest{
 		json.put("id_to_nick", checkUserPanel.txt_id.getText());
 		json.put("password", Integer.parseInt(new String(checkUserPanel.txt_pw.getPassword())));
 		
+		System.out.println(json.toJSONString());
 		String JSONRequest=json.toJSONString();
 		clientThread.send(JSONRequest);		
 	}

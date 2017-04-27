@@ -98,8 +98,8 @@ public class ClientThread implements Runnable{
 			}else if (responseType.equalsIgnoreCase("idCheck")) {
 				IdCheckReact checkReact=new IdCheckReact(main, json);
 								
-			}else if(responseType.equalsIgnoreCase("membership_regist")){
-				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
+			}else if(responseType.equalsIgnoreCase("membership_login")){
+				MemberLoginReact memberLoginReact=new MemberLoginReact(main, json);
 				
 			}else if(responseType.equalsIgnoreCase("membership_regist")){
 				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
