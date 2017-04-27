@@ -17,6 +17,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import hotelclient.ClientMain;
+import hotelclient.network.IdCheckReact;
+import hotelclient.network.IdCheckRequest;
 import hotelclient.network.MemberRegistReact;
 import hotelclient.network.MemberRegistRequest;
 
@@ -31,7 +33,7 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 	
 	Font font;
 	JPasswordField txt_pw;
-	JButton bt_regist, bt_prev;
+	public JButton bt_idCheck, bt_regist, bt_prev;
 
 	
 	public RegMemberPanel(ClientMain main) {
@@ -60,8 +62,11 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 		txt_email.setFont(font);
 		txt_phone.setFont(font);
 
+		bt_idCheck = new JButton("id중복 확인");
 		bt_regist = new JButton("등록");
 		bt_prev = new JButton("이전");
+		
+		bt_regist.setEnabled(false);
 
 		setLayout(new BorderLayout());
 		p_input.setLayout(new GridLayout(5, 2));
@@ -87,8 +92,9 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 		p_input.add(la_phone);
 		p_input.add(txt_phone);
 
-		p_south.add(bt_regist);
 		p_south.add(bt_prev);
+		p_south.add(bt_idCheck);
+		p_south.add(bt_regist);
 
 		add(p_north, BorderLayout.NORTH);
 		add(p_input);
@@ -96,7 +102,8 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 
 		bt_regist.addActionListener(this);
 		bt_prev.addActionListener(this);
-
+		bt_idCheck.addActionListener(this);
+		
 		setPreferredSize(new Dimension(400, 350));
 		setVisible(false);
 	}
@@ -191,6 +198,12 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 			}			
 		}*/
 	}
+	
+	public void idCheck(){
+		IdCheckRequest checkRequest=new IdCheckRequest(main);
+		checkRequest.requestJSON(txt_id.getText());
+		
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		Object obj = (Object) e.getSource();
@@ -198,6 +211,8 @@ public class RegMemberPanel extends JPanel implements ActionListener {
 			main.setPage(0);
 		} else if (obj == bt_regist) {
 			regist();
+		} else if (obj==bt_idCheck){
+			idCheck();
 		}
 	}
 

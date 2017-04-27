@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 import hotelclient.network.ChatReact;
 import hotelclient.network.GuestLoginReact;
 import hotelclient.network.GuestResvReact;
+import hotelclient.network.IdCheckReact;
 import hotelclient.network.MemberLoginReact;
 import hotelclient.network.MemberRegistReact;
 import hotelclient.network.MemberResvReact;
@@ -86,7 +87,6 @@ public class ClientThread implements Runnable{
 				RoomSearchReact searchReact=new RoomSearchReact(main, json);				
 												
 			}else if (responseType.equalsIgnoreCase("member_resv")) {
-				System.out.println(json.toString());
 				MemberResvReact resvReact=new MemberResvReact(main, json);
 				
 			}else if (responseType.equalsIgnoreCase("guest_resv")) {
@@ -95,9 +95,12 @@ public class ClientThread implements Runnable{
 			}else if (responseType.equalsIgnoreCase("guest_login")) {								
 				GuestLoginReact  guestLoginReact=new GuestLoginReact(main, json);
 				
-			}else if (responseType.equalsIgnoreCase("membership_login")) {
-				MemberLoginReact memberLoginReact=new MemberLoginReact(main, json);
+			}else if (responseType.equalsIgnoreCase("idCheck")) {
+				IdCheckReact checkReact=new IdCheckReact(main, json);
 								
+			}else if(responseType.equalsIgnoreCase("membership_regist")){
+				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
+				
 			}else if(responseType.equalsIgnoreCase("membership_regist")){
 				MemberRegistReact memberRegistReact=new MemberRegistReact(main, json);
 				
