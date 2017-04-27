@@ -136,7 +136,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		la_optionSelect=new JLabel("2. ¿É¼Ç ¼±ÅÃ");
 		bt_search=new JButton("3. ÀÜ¿© °´½Ç °Ë»ö");
 		group=new CheckboxGroup();
-		boxs[0]=deluxe=new Checkbox("deluxe", group, true);
+		boxs[0]=deluxe=new Checkbox("deluxe", group, false);
 		boxs[1]=business=new Checkbox("business", group, false);
 		boxs[2]=grand=new Checkbox("grand", group, false);
 		boxs[3]=first=new Checkbox("first", group, false);
