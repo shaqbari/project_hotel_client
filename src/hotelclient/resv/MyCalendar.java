@@ -25,6 +25,8 @@ public class MyCalendar extends JPanel implements ActionListener{
 	DateBox[] box=new DateBox[7*6];
 	ArrayList<DateBox> clickedBox=new ArrayList<DateBox>();//클릭한 Datebox가 저장될 ArrayList
 	
+	//클릭한 날짜가 저장될 이중배열(달력앞뒤 버튼눌러도 저장될수 있게!)
+	int[][] dateBuffer=new int[2][3];
 	
 	Calendar cal=Calendar.getInstance();
 	
@@ -142,5 +144,6 @@ public class MyCalendar extends JPanel implements ActionListener{
 			printDate();
 		}
 	}
+
 
 }

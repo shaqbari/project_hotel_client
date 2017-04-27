@@ -43,7 +43,19 @@ public class DateBox extends JPanel {
 		//나와 마우스 리스너 연결//dd값이 있을 때만 pop한다.
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				yyyy = myCalendar.yyyy;
+				mm = myCalendar.mm;
+				dd = Integer.parseInt(la.getText());
+				isClicked = !isClicked;
+				if (myCalendar.resvPanel.count<2) {
+					myCalendar.dateBuffer[myCalendar.resvPanel.count][0]=yyyy;				
+					myCalendar.dateBuffer[myCalendar.resvPanel.count][1]=mm;				
+					myCalendar.dateBuffer[myCalendar.resvPanel.count][2]=dd;				
+				}
+				
 				pop();
+				
+				myCalendar.resvPanel.count++;
 			}
 		});		
 		
@@ -57,10 +69,7 @@ public class DateBox extends JPanel {
 	
 	public void pop(){		
 		if (la.getText().length()!=0) {
-			yyyy = myCalendar.yyyy;
-			mm = myCalendar.mm;
-			dd = Integer.parseInt(la.getText());
-			isClicked = !isClicked;
+			
 			if (isClicked) {//클릭되었다면 진한회색으로 바꾸고 ArrayList에 추가			
 				if (myCalendar.resvPanel.count < 2) {
 					JOptionPane.showMessageDialog(this, yyyy + "년 " + (mm + 1) + "월 " + dd + "일");
@@ -90,6 +99,53 @@ public class DateBox extends JPanel {
 									.setText(yyyy + "-" + DateUtil.getDateString(Integer.toString(mm + 1)) + "-"
 											+ DateUtil.getDateString(Integer.toString(dd)) + "-14-00-00");
 						}
+						
+						
+						
+						int beforeMM=myCalendar.dateBuffer[0][1];
+						int nowMM=myCalendar.dateBuffer[1][1];
+						
+						int first=myCalendar.dateBuffer[0][2];
+						int second=myCalendar.dateBuffer[1][2];
+						int large;
+						int small;
+						if (first>second) {
+							large=first;
+							small=second;
+						}else {
+							large=second;
+							small=first;		
+						}
+						
+						
+						//첫번째 선택한거와 두번째 선택한거 사이에 coloring
+						for (int i = 0; i < myCalendar.box.length; i++) {
+							
+							if(beforeMM==nowMM){//같은달이라면
+								if(myCalendar.box[i].la.getText().length()!=0){//값이 있는 box만 색깔 넣는다.
+									if (Integer.parseInt(myCalendar.box[i].la.getText())>=small&&
+											Integer.parseInt(myCalendar.box[i].la.getText())<=large) {
+										myCalendar.box[i].setBackground(Color.GRAY);
+									}
+								}
+							}else if (beforeMM>nowMM) {//이전달이라면
+								if(myCalendar.box[i].la.getText().length()!=0){
+									if (Integer.parseInt(myCalendar.box[i].la.getText())>=second) {
+										myCalendar.box[i].setBackground(Color.GRAY);
+									}
+								}							
+							}else if (beforeMM<nowMM) {//다음달이라면
+								if(myCalendar.box[i].la.getText().length()!=0){
+									if (Integer.parseInt(myCalendar.box[i].la.getText())<=second) {
+										myCalendar.box[i].setBackground(Color.GRAY);
+									}
+								}	
+							}
+							
+							
+						}
+						
+						
 
 						//달력 앞뒤 버튼 불활성화
 						myCalendar.bt_prev.setEnabled(false);
@@ -98,7 +154,7 @@ public class DateBox extends JPanel {
 						setStay();
 					}
 
-					myCalendar.resvPanel.count++;
+					//myCalendar.resvPanel.count++;
 				} else {
 					JOptionPane.showMessageDialog(this, "더이상 날짜를 선택할 수 없습니다.");
 

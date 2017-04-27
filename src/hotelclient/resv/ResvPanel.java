@@ -96,6 +96,8 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	Font font=new Font("맑은 고딕", Font.PLAIN, 15);
 	
 	
+	ColorThread colorThread;//두번째 클릭시 색칠하는데 쓰일 쓰레드
+	
 	//생성자 시작
 	public ResvPanel(ClientMain main) {
 		this.main=main;
@@ -278,6 +280,9 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_room_title.setBackground(Color.LIGHT_GRAY);
 		p_room_button.setBackground(Color.LIGHT_GRAY);
 		p_east_resv.setBackground(Color.LIGHT_GRAY);
+		
+		//colorThread=new ColorThread(this); 
+		
 		
 		getOptionInfo();
 		
