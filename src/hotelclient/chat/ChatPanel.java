@@ -35,7 +35,7 @@ public class ChatPanel extends JPanel {
 		
 		p_chat=new JPanel();
 		la_desc=new JLabel("관리자와 채팅");
-		area=new JTextArea(15, 20);
+		area=new JTextArea(12,16);
 		scroll=new JScrollPane(area);
 		txt_input=new JTextField(20);
 				
@@ -73,8 +73,8 @@ public class ChatPanel extends JPanel {
 		});
 		
 		setBackground(Color.PINK);
-		setPreferredSize(new Dimension(1100, 900));
-		setVisible(false);	
+		setPreferredSize(new Dimension(250,300));
+		setVisible(true);	
 	}
 	
 	//채팅의 경우

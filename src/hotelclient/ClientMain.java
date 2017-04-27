@@ -8,8 +8,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
@@ -23,12 +21,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import hotelclient.attract.AttractionPanel;
-import hotelclient.chat.ChatPanel;
 import hotelclient.home.HomePanel;
 import hotelclient.main.CheckUserPanel;
 import hotelclient.main.ClockThread;
@@ -79,9 +73,9 @@ public class ClientMain extends JFrame implements ActionListener {
 		{ "home.png", "홈" },
 		{ "attraction.png", "주변명소" },
 		{ "service.png", "서비스" },
-		{ "resv.png", "예약" },
-		{ "chat.png", "채팅" }
+		{ "resv.png", "예약" }
 	};// res폴더에서 사용할 이미지
+	
 	public MyButton[] myButtons = new MyButton[imgName.length];
 
 	// 메뉴선택에 따라 패널전환에 사용될 객체들
@@ -89,8 +83,8 @@ public class ClientMain extends JFrame implements ActionListener {
 	AttractionPanel attractionPanel;
 	public ServicePanel servicePanel;
 	public ResvPanel resvPanel;
-	public ChatPanel chatPanel;
-	JPanel[] p_menus = new JPanel[5];
+	//public ChatPanel chatPanel;
+	JPanel[] p_menus = new JPanel[4];
 
 	// 메뉴선택에 따라 패널전환에 사용될 객체들
 	// todo
@@ -155,7 +149,7 @@ public class ClientMain extends JFrame implements ActionListener {
 		p_menus[1]=attractionPanel=new AttractionPanel(this);
 		p_menus[2]=servicePanel=new ServicePanel(this);
 		p_menus[3]=resvPanel=new ResvPanel(this);
-		p_menus[4]=chatPanel=new ChatPanel(this);
+		//p_menus[4]=chatPanel=new ChatPanel(this);
 		
 		clock=new ClockThread(this); //시계생성
 		
@@ -278,8 +272,6 @@ public class ClientMain extends JFrame implements ActionListener {
 			menuVisible(servicePanel);			
 		}else if (obj==bt_resv){
 			menuVisible(resvPanel);
-		}else if (obj==bt_chat) {
-			menuVisible(chatPanel);
 		}
 	}
 

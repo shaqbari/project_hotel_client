@@ -24,7 +24,7 @@ public class ServiceReact {
 	public void react(){
 		if (result.equalsIgnoreCase("yes")) {
 			content=json.get("content").toString();
-			main.chatPanel.area.append(content+"서비스가 주문되었습니다"+"\n");	
+			main.homePanel.chatPanel.area.append(content+"서비스가 주문되었습니다"+"\n");	
 			System.out.println("서비스완료");			
 			JOptionPane.showMessageDialog(main, "서비스 주문이 완료되었습니다.\n서비스번호 : "+json.get("service_use_id").toString());
 			//main.resvPanel.refrash();
