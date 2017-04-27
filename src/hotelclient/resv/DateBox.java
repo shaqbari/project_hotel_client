@@ -100,13 +100,15 @@ public class DateBox extends JPanel {
 											+ DateUtil.getDateString(Integer.toString(dd)) + "-14-00-00");
 						}
 						
-						
-						
+						//선택한 날짜간 coloring
+						int beforeYY=myCalendar.dateBuffer[0][0];						
 						int beforeMM=myCalendar.dateBuffer[0][1];
-						int nowMM=myCalendar.dateBuffer[1][1];
-						
 						int first=myCalendar.dateBuffer[0][2];
+						
+						int nowYY=myCalendar.dateBuffer[1][0];
+						int nowMM=myCalendar.dateBuffer[1][1];
 						int second=myCalendar.dateBuffer[1][2];
+						
 						int large;
 						int small;
 						if (first>second) {
@@ -120,29 +122,35 @@ public class DateBox extends JPanel {
 						
 						//첫번째 선택한거와 두번째 선택한거 사이에 coloring
 						for (int i = 0; i < myCalendar.box.length; i++) {
-							
-							if(beforeMM==nowMM){//같은달이라면
-								if(myCalendar.box[i].la.getText().length()!=0){//값이 있는 box만 색깔 넣는다.
-									if (Integer.parseInt(myCalendar.box[i].la.getText())>=small&&
-											Integer.parseInt(myCalendar.box[i].la.getText())<=large) {
-										myCalendar.box[i].setBackground(Color.GRAY);
+							if (myCalendar.box[i].la.getText().length() != 0) {//값이 있는 box만 색깔 넣는다.
+								if (beforeYY == nowYY) {//년도가 같으면
+									if (beforeMM == nowMM) {//같은달이라면
+										if (Integer.parseInt(myCalendar.box[i].la.getText()) >= small
+												&& Integer.parseInt(myCalendar.box[i].la.getText()) <= large) {
+											myCalendar.box[i].setBackground(Color.GRAY);
+										}
+									} else if (beforeMM > nowMM) {//이전달이라면
+										if (Integer.parseInt(myCalendar.box[i].la.getText()) >= second) {//두번째 선택한 날짜보다 큰날을 색칠한다.
+											myCalendar.box[i].setBackground(Color.GRAY);
+										}
+									} else if (beforeMM < nowMM) {//다음달이라면
+										if (Integer.parseInt(myCalendar.box[i].la.getText()) <= second) { //두번째 선택한 날짜보다 작은 날을 색칠한다.
+											myCalendar.box[i].setBackground(Color.GRAY);
+										}
 									}
-								}
-							}else if (beforeMM>nowMM) {//이전달이라면
-								if(myCalendar.box[i].la.getText().length()!=0){
-									if (Integer.parseInt(myCalendar.box[i].la.getText())>=second) {
-										myCalendar.box[i].setBackground(Color.GRAY);
+								} else {//다른 년도라면
+									if (beforeYY > nowYY) {//이전년도라면
+										if (Integer.parseInt(myCalendar.box[i].la.getText()) >= second) {//두번째 선택한 날짜보다 큰날을 색칠한다.
+											myCalendar.box[i].setBackground(Color.GRAY);
+										}
+									}else if (beforeYY < nowYY) {//다음년도라면
+										if (Integer.parseInt(myCalendar.box[i].la.getText()) <= second) { //두번째 선택한 날짜보다 작은 날을 색칠한다.
+											myCalendar.box[i].setBackground(Color.GRAY);
+										}
 									}
-								}							
-							}else if (beforeMM<nowMM) {//다음달이라면
-								if(myCalendar.box[i].la.getText().length()!=0){
-									if (Integer.parseInt(myCalendar.box[i].la.getText())<=second) {
-										myCalendar.box[i].setBackground(Color.GRAY);
-									}
-								}	
-							}
-							
-							
+									
+								} 
+							}							
 						}
 						
 						

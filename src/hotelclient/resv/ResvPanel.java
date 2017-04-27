@@ -127,7 +127,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		p_east_resv.setPreferredSize(new Dimension(WIDTH/3, HEIGHT*4/7-10));
 		
 		la_optionSelect=new JLabel("2. 옵션 선택");
-		bt_search=new JButton("잔여 객실 검색");
+		bt_search=new JButton("3. 잔여 객실 검색");
 		group=new CheckboxGroup();
 		boxs[0]=deluxe=new Checkbox("deluxe", group, true);
 		boxs[1]=business=new Checkbox("business", group, false);
@@ -147,13 +147,13 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		
 		/*-------------------------------------------------------------*/
 				
-		la_room=new JLabel("  3. 방 선택");
+		la_room=new JLabel("  4. 방 선택");
 		
 		if (main.checkAdminPanel.isGuest) {
-			la_resv=new JLabel("  4. 비회원예약확인");			
+			la_resv=new JLabel("  5. 비회원예약확인");			
 			
 		}else {
-			la_resv=new JLabel("  4. 회원예약확인");			
+			la_resv=new JLabel("  5. 회원예약확인");			
 			
 		}
 		resvInfo[0]=la_start=new JLabel("입실예약일 : ");
