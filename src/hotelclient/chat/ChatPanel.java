@@ -59,13 +59,16 @@ public class ChatPanel extends JPanel {
 					//main.clientThread.sendChat(txt_input.getText());
 					cal=Calendar.getInstance();
 					yyyy=Integer.toString(cal.get(Calendar.YEAR));
-					 mm=Integer.toString(cal.get(Calendar.MONTH));
+					int month=cal.get(Calendar.MONTH)+1;
+					mm=Integer.toString(month);
 					 dd=Integer.toString(cal.get(Calendar.DATE));
 					 hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
 					 mi=Integer.toString(cal.get(Calendar.MINUTE));
 					 ss=Integer.toString(cal.get(Calendar.SECOND));
 					 
-					sendChat(txt_input.getText()+" "+yyyy+"-"+mm+"-"+dd+" "+hh24+":"+mi+":"+ss);
+					 String time=yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss;
+					 
+					sendChat(txt_input.getText()+" "+time);
 					txt_input.setText("");
 					txt_input.requestFocus();
 				}
@@ -90,18 +93,20 @@ public class ChatPanel extends JPanel {
 		
 		 cal=Calendar.getInstance();
 		yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		 mm=Integer.toString(cal.get(Calendar.MONTH));
+		int month=cal.get(Calendar.MONTH)+1;
+		mm=Integer.toString(month);
 		 dd=Integer.toString(cal.get(Calendar.DATE));
 		 hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
 		 mi=Integer.toString(cal.get(Calendar.MINUTE));
 		 ss=Integer.toString(cal.get(Calendar.SECOND));
 		
+		String time=yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss;
 		
 		StringBuffer json=new StringBuffer();
 		json.append("{");
 		json.append("\"requestType\":\"chat\",");
 		json.append("\"room_number\":"+main.room_Number+",");
-		json.append("\"requestTime\":\""+yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss+"\",");
+		json.append("\"requestTime\":\""+time+"\",");
 		json.append("\"hotel_user_id\":"+main.hotel_user_id+",");			
 		json.append("\"content\":\""+msg+"\"");			
 		json.append("}");		

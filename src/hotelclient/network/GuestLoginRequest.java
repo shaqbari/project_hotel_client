@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import hotelclient.ClientMain;
 import hotelclient.ClientThread;
 import hotelclient.main.CheckUserPanel;
+import hotelclient.resv.DateUtil;
 
 public class GuestLoginRequest{
 	ClientMain main;
@@ -29,7 +30,9 @@ public class GuestLoginRequest{
 				
 		Calendar cal=Calendar.getInstance();
 		yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		mm=Integer.toString(cal.get(Calendar.MONTH));
+		int month=cal.get(Calendar.MONTH)+1;
+		mm=DateUtil.getDateString(Integer.toString(month));
+		System.out.println("여기서나온mm은?"+mm);
 		dd=Integer.toString(cal.get(Calendar.DATE));
 		hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
 		mi=Integer.toString(cal.get(Calendar.MINUTE));
