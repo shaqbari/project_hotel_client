@@ -71,7 +71,6 @@ public class RoomPanel extends JPanel{
 		
 		//add(bt_detail, BorderLayout.SOUTH);
 	
-		
 		//setBackground(Color.WHITE);
 		can.setPreferredSize(new Dimension(width, height));
 		setPreferredSize(new Dimension(width, height+30));
