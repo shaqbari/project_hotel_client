@@ -132,12 +132,14 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		
 		Calendar cal=Calendar.getInstance();
 		String yyyy=Integer.toString(cal.get(Calendar.YEAR));
-		String mm=Integer.toString(cal.get(Calendar.MONTH));
+		int month=cal.get(Calendar.MONTH)+1;
+		String mm=Integer.toString(month);
 		String dd=Integer.toString(cal.get(Calendar.DATE));
 		String hh24=Integer.toString(cal.get(Calendar.HOUR_OF_DAY));
 		String mi=Integer.toString(cal.get(Calendar.MINUTE));
 		String ss=Integer.toString(cal.get(Calendar.SECOND));
 		
+		String time=yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss;
 		//일단은 이렇게..
 		String msg=serv_name;
 		//System.out.println(msg);
@@ -146,7 +148,7 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		json.put("requestType","service");
 		json.put("room_number",main.room_Number);
 		json.put("service_id",service_id);
-		json.put("requestTime",yyyy+"-"+mm+"-"+dd+"-"+hh24+"-"+mi+"-"+ss);
+		json.put("requestTime",time);
 		json.put("hotel_user_id",main.hotel_user_id);			
 		json.put("content",msg);
 		
@@ -155,12 +157,6 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		//System.out.println(JSONRequest);
 		
 		main.clientThread.send(JSONRequest);
-	}
-	
-	//예약주문 , 서비스 선택 후 예약일시 정하면 예약주문 가능
-	public void resvOrder(){
-		Serv_resvOrder resv = new Serv_resvOrder(main, serv_name, icon);
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
