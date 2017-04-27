@@ -62,8 +62,6 @@ public class MyCalendar extends JPanel implements ActionListener{
 		yyyy=cal.get(Calendar.YEAR);//int field가 인수로 요구되면 상수를 강력하게 생각하자
 		mm=cal.get(Calendar.MONTH); //0부터 시작하기 때문에 출력할때만 +1해야한다.
 		dd=cal.get(Calendar.DATE);
-		
-		System.out.println(yyyy+"-"+mm+1+"-"+dd);
 						
 		bt_prev.addActionListener(this);
 		bt_next.addActionListener(this);

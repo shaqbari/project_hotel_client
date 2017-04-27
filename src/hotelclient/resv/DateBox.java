@@ -89,7 +89,7 @@ public class DateBox extends JPanel {
 						setStay();
 					} else {//두번째 선택시 조건에 따라 출력
 								//첫번째 날보다 전의 날짜 선택하면 startday표시수정 다음 날짜 선택하면 endday표시 수정
-						System.out.println(compare());
+						System.out.println("비교"+compare());
 						if (compare() > 0) {//뒤에거 세팅
 							myCalendar.resvPanel.la_end_input.setText(
 									DateUtil.getPlusDate(yyyy + "-" + DateUtil.getDateString(Integer.toString(mm + 1))
