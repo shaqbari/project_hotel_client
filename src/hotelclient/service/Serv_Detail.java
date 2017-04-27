@@ -29,7 +29,7 @@ public class Serv_Detail extends JFrame implements ActionListener{
 	String serv_name;
 	JLabel la_name,la_price;
 	ImageIcon icon;
-	JButton bt,bt_order,bt_resvOrder;
+	JButton bt,bt_order;
 	ArrayList<Service> service = new ArrayList<Service>();
 	
 	String service_id;
@@ -68,15 +68,15 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		
 		//p_order
 		bt_order = new JButton("주문");
-		bt_resvOrder = new JButton("예약주문");
+		//bt_resvOrder = new JButton("예약주문");
 		p_order.add(bt_order);
-		p_order.add(bt_resvOrder);
+		//p_order.add(bt_resvOrder);
 		
 		add(p_info,BorderLayout.CENTER);
 		add(p_order,BorderLayout.SOUTH);
 		
 		bt_order.addActionListener(this);
-		bt_resvOrder.addActionListener(this);
+		//bt_resvOrder.addActionListener(this);
 		
 		setVisible(true);
 		setSize(new Dimension(500,400));
@@ -140,7 +140,7 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		
 		//일단은 이렇게..
 		String msg=serv_name;
-		System.out.println(msg);
+		//System.out.println(msg);
 		
 		JSONObject json = new JSONObject();
 		json.put("requestType","service");
@@ -152,7 +152,7 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		
 		String JSONRequest=json.toJSONString();
 		
-		System.out.println(JSONRequest);
+		//System.out.println(JSONRequest);
 		
 		main.clientThread.send(JSONRequest);
 	}
@@ -167,9 +167,9 @@ public class Serv_Detail extends JFrame implements ActionListener{
 		Object obj=e.getSource();
 		if(obj==bt_order){
 			order();
-		}else if(obj==bt_resvOrder){
+		}/*else if(obj==bt_resvOrder){
 			resvOrder();
-		}
+		}*/
 	}
 
 }

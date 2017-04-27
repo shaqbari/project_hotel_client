@@ -4,13 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,17 +13,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import hotelclient.ClientMain;
-
-import hotelclient.service.Serv_view;
+import hotelclient.chat.ChatPanel;
 
 public class HomePanel extends JPanel {
 	ClientMain main;
 	
 
-	JPanel  p_west,p_east, p_south;
+	JPanel  p_west, p_south;
+	JPanel p_east,p_east_n,p_east_s;
 
 	JPanel p_north, p_center;
-
+	
+	public ChatPanel chatPanel;
+	
 	JPanel resvInfo;
 	JPanel roomPanel;
 	int resvInfoWidth=250;
@@ -51,9 +48,12 @@ public class HomePanel extends JPanel {
 		
 		p_west=new JPanel();
 		p_east=new JPanel();
+		p_east_n=new JPanel();
+		p_east_s=new JPanel();
 		p_south=new JPanel();
 		resvInfo=new JPanel();
 		roomPanel=new JPanel();
+		chatPanel=new ChatPanel(main);
 		
 		dimension=new Dimension((resvInfoWidth/2)-10, (resvInfoheight/5)-10);
 		title=new JLabel("예약정보 ");
@@ -67,7 +67,8 @@ public class HomePanel extends JPanel {
 		resv_time_input=new JLabel();
 		stay_input=new JLabel();
 		
-			
+		p_east.setLayout(new BorderLayout());
+		
 		resvInfo.setPreferredSize(new Dimension(resvInfoWidth, resvInfoheight));
 		resvInfo.setBackground(Color.WHITE);
 		
@@ -101,10 +102,12 @@ public class HomePanel extends JPanel {
 		//background.setPreferredSize(new Dimension(1000, 900));
 		
 		
-		p_west.setPreferredSize(new Dimension(900, 600));
+		p_west.setPreferredSize(new Dimension(800, 600));
 		p_west.add(background);
-		p_east.add(resvInfo);
-		
+		p_east_n.add(chatPanel);
+		p_east_s.add(resvInfo);
+		p_east.add(p_east_n,BorderLayout.NORTH);
+		p_east.add(p_east_s,BorderLayout.SOUTH);
 		//p_south.add(bt); //RoomPanel을 붙일 예정
 		
 		

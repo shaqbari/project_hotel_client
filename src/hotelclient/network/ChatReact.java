@@ -20,7 +20,7 @@ public class ChatReact {
 
 	public void react(){
 		content=json.get("content").toString();
-		main.chatPanel.area.append(content+"\n");		
+		main.homePanel.chatPanel.area.append(content+"\n");		
 		
 	}
 	
