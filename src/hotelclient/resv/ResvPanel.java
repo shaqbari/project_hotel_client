@@ -483,6 +483,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 							String bed = optionInfo.get(j).getRoom_option_bed();
 							String view = optionInfo.get(j).getRoom_option_view();
 							String max = Integer.toString(optionInfo.get(j).getRoom_option_max());
+							String price = Integer.toString(optionInfo.get(j).getRoom_option_price());
 							URL url = new URL("http://pseudoluna.synology.me/experi/images/"+optionInfo.get(j).getRoom_option_img());			
 							Image img = ImageIO.read(url);
 							
@@ -495,7 +496,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 							};
 							can.setPreferredSize(new Dimension(200, 200));
 							p_option_img.add(can);	
-							la_option_detail.setText("<html>ㆍ평형 : "+size+"평 <br> ㆍ침대 : "+bed+"<br> ㆍ객실 뷰 : "+view+"<br>ㆍ최대인원 : "+max+"명 </html>");		
+							la_option_detail.setText("<html>ㆍ평형 : "+size+"평 <br> ㆍ침대 : "+bed+"<br> ㆍ객실 뷰 : "+view+"<br>ㆍ최대인원 : "+max+"명 <br>ㆍ가격 :"+price+"원 </html>");		
 						} catch (IOException e1) {
 							e1.printStackTrace();
 						}
