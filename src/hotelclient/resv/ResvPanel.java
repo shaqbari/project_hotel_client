@@ -65,7 +65,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 	JLabel la_optionSelect;
 	JButton bt_search;
 	CheckboxGroup group;
-	Checkbox deluxe, business, grand, first, vip, vvip, sweet;
+	Checkbox deluxe, business, grand, first, vip, vvip, suite;
 	Checkbox[] boxs=new Checkbox[7];//버튼 담을 배열
 	
 	/*-------------------------------------------------------------*/
@@ -142,7 +142,7 @@ public class ResvPanel extends JPanel implements ActionListener, ItemListener{
 		boxs[3]=first=new Checkbox("first", group, false);
 		boxs[4]=vip=new Checkbox("vip", group, false);
 		boxs[5]=vvip=new Checkbox("vvip", group, false);
-		boxs[6]=sweet=new Checkbox("sweet", group, false);
+		boxs[6]=suite=new Checkbox("suite", group, false);
 		
 		la_optionSelect.setPreferredSize(new Dimension(WIDTH/3-150, 40));
 		

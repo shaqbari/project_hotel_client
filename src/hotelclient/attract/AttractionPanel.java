@@ -95,7 +95,7 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		
 		la_mapInfo.setFont(new Font("맑은 고딕", Font.BOLD, 17));
 		la_mapInfo.setForeground(Color.BLACK);
-		la_mapInfo.setText("<html><br> 신라호텔에 오신 것을 환영합니다. <br><br> ㆍ 주소 : 제주특별자치도 서귀포시 색달동 중문관광로72번길 75 <br> ㆍ 전화번호 : 064-735-5114 <br>ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
+		la_mapInfo.setText("<html><br> 4조 호텔에 오신 것을 환영합니다. <br><br> ㆍ 주소 : 제주특별자치도 서귀포시 색달동 중문관광로72번길 75 <br> ㆍ 전화번호 : 064-735-5114 <br>ㆍ 지도 클릭시 구글 맵으로 연결됩니다.</html>");
 		
 		str = "https://www.google.co.kr/maps/place/%ED%98%B8%ED%85%94%EC%8B%A0%EB%9D%BC%EC%A0%9C%EC%A3%BC/@33.2473409,126.4058993,17z/data=!4m8!1m2!2m1!1z7Iug65287Zi47YWUIOygnOyjvA!3m4!1s0x350c5acf5f97fff1:0x1a4e339a880f3558!8m2!3d33.2472877!4d126.4081496";
 		
