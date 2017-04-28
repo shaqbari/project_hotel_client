@@ -44,7 +44,7 @@ public class AttractionPanel extends JPanel implements ActionListener {
 	JButton bt_zoomIn, bt_zoomOut;
 	
 	JPanel p_center, p_map, p_zoom;
-	JLabel la_mapInfo, la_zoom;
+	JLabel la_mapInfo, la_zoom, la_zoomIn, la_zoomOut;
 	// Áöµµ ±âº» À§µµ, °æµµ, »ý¼ºÀÌ¹ÌÁö ¸í
 	String latitude = "33.249476";
 	String longitude = "126.408080";
@@ -76,8 +76,13 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		buttons[7] = bt_manjang = new JButton();
 		
 		//Áöµµ ÁÜÀÎ, ÁÜ¾Æ¿ô
-		bt_zoomIn = new JButton("+");
-		bt_zoomOut = new JButton("-");
+		bt_zoomIn = new JButton();
+		bt_zoomOut = new JButton();
+		la_zoomIn = new JLabel("+");
+		la_zoomOut = new JLabel("-");
+		
+		la_zoomIn.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
+		la_zoomOut.setFont(new Font("¸¼Àº °íµñ", Font.BOLD, 20));
 		
 		p_center.setBackground(Color.DARK_GRAY);
 		p_center.setLayout(new FlowLayout());
@@ -85,6 +90,9 @@ public class AttractionPanel extends JPanel implements ActionListener {
 		p_map.setLayout(new BorderLayout());
 		p_map.setPreferredSize(new Dimension(500, 800));
 		p_map.setBackground(Color.LIGHT_GRAY);
+				
+		bt_zoomOut.add(la_zoomOut);
+		bt_zoomIn.add(la_zoomIn);
 		
 		p_zoom.add(bt_zoomOut);
 		p_zoom.add(la_zoom);
