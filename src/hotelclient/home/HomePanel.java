@@ -39,7 +39,7 @@ public class HomePanel extends JPanel {
 	private JLabel resv_id_input, guest_name_input, resv_time_input, stay_input;
 	
 	
-	String[] room_type={"deluxe","business","grand","first","vip","vvip", "sweet"};
+	String[] room_type={"deluxe","business","grand","first","vip","vvip", "suite"};
 	//ArrayList<Room_Option> list;
 
 	
