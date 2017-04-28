@@ -49,14 +49,14 @@ public class HomePanel extends JPanel {
 		p_west=new JPanel();
 		p_east=new JPanel();
 		p_east_n=new JPanel();
-		p_east_s=new JPanel();
+		p_east_s=new JPanel() ;
 		p_south=new JPanel();
 		resvInfo=new JPanel();
 		roomPanel=new JPanel();
 		chatPanel=new ChatPanel(main);
 		
 		dimension=new Dimension((resvInfoWidth/2)-10, (resvInfoheight/5)-10);
-		title=new JLabel("예약정보 ");
+		title=new JLabel("                            최근 예약정보 ");
 		resv_id=new JLabel("예약번호 : ");
 		guest_name=new JLabel("이름 : ");
 		resv_time=new JLabel("입실가능시간 : ");
